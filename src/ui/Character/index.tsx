@@ -64,9 +64,9 @@ const SavingThrowsComponent = observer(() => {
               {t(`attribute.${attribute.name}`)}
             </div>
             <div
-              className={`text-2xl font-bold px-2 my-2 bg-${
-                attribute.isSavingThrow ? 'green' : 'gray'
-              }-500 text-white inline-block rounded`}
+              className={`text-2xl font-bold px-2 my-2 ${
+                attribute.isSavingThrow ? 'bg-green-500' : 'bg-gray-500'
+              } text-white inline-block rounded`}
             >
               {attribute.savingThrow}
             </div>
