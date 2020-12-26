@@ -44,6 +44,8 @@
     "add-item": "Gegenstand hinzufügen"
   },
   "notes": {
+    "singular":"Notiz",
+    "plural":"Notizen",
     "add-note": "Notiz hinzufügen"
   }
 }

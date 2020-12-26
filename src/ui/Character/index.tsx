@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { useCharacterStore, useStore } from '../../store';
-import { NotesComponent } from '../../components/Notes';
 import { Modal } from '../../components/Modal';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
 import { SkillsComponent } from './components/Skills';
+import { NotesComponent } from './components/Notes';
 import { InventoryComponent } from './components/Inventory';
 import { HitpointsComponent } from './components/Hitpoints';
 import { AttributesComponent } from './components/Attributes';
@@ -236,7 +236,7 @@ export const Character = observer(() => {
 
             <div className="flex ml-auto mt-4 md:mt-0">
               <Button onClick={() => setNotesOpen(true)} color="yellow">
-                Notizen ({character.notes.values.length})
+                {t('notes.plural')} ({character.notes.values.length})
               </Button>
               <Button
                 filled

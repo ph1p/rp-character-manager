@@ -22,7 +22,7 @@ export const HitpointsComponent = observer(() => {
   return (
     <div className="flex flex-col text-center place-items-center">
       <div>
-        <svg width="120" height="120" viewBox="0 0 42 42">
+        <svg className="h-48 w-48 md:h-32 md:w-32" viewBox="0 0 42 42">
           <circle
             className="donut-ring"
             cx="21"
@@ -64,14 +64,14 @@ export const HitpointsComponent = observer(() => {
         ) : (
           <div className="flex">
             <div
-              className={`text-xs cursor-pointer font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 h-6 w-6 text-center select-none`}
+              className={`cursor-pointer font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 h-9 w-9 text-lg md:text-xs md:h-6 md:w-6 text-center select-none`}
               onClick={() => store.setHitpoints(store.hitpoints - 1)}
             >
               -
             </div>
-            <div className="mx-2">{t('hitpoints')}</div>
+            <div className="mx-2 text-2xl md:text-base">{t('hitpoints')}</div>
             <div
-              className={`text-xs cursor-pointer font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 h-6 w-6 text-center select-none`}
+              className={`cursor-pointer font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 h-9 w-9 text-lg md:text-xs md:h-6 md:w-6  text-center select-none`}
               onClick={() => store.setHitpoints(store.hitpoints + 1)}
             >
               +
