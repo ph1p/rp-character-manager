@@ -99,7 +99,7 @@ export const NotesComponent = observer(() => {
   };
 
   return (
-    <div>
+    <div style={{ width: 500 }}>
       <h2 className="text-xl mb-2">{t('notes.plural')}</h2>
       <div
         style={{ maxHeight: 300 }}

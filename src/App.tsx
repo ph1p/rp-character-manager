@@ -22,49 +22,51 @@ export default observer(() => {
   return (
     <>
       <Modal open={open} onClose={() => store.selectedID && setOpen(!open)}>
-        <Select
-          label="Bestehende Charaktere"
-          value={store.selectedID}
-          onChange={(e) => store.selectCharacter(e.currentTarget.value)}
-        >
-          <option value="">----</option>
-          {store.characters.map((character) => (
-            <option value={character.id} key={character.id}>
-              {character.name}
-            </option>
-          ))}
-        </Select>
+        <div style={{ width: 300 }}>
+          <Select
+            label="Bestehende Charaktere"
+            value={store.selectedID}
+            onChange={(e) => store.selectCharacter(e.currentTarget.value)}
+          >
+            <option value="">----</option>
+            {store.characters.map((character) => (
+              <option value={character.id} key={character.id}>
+                {character.name}
+              </option>
+            ))}
+          </Select>
 
-        <div className="h-px bg-gray-200 my-7"></div>
+          <div className="h-px bg-gray-200 my-7"></div>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (name) {
-              const char = store.createCharacter(name);
-              store.selectCharacter(char.id);
-              setName('');
-              setOpen(false);
-            }
-          }}
-        >
-          <Input
-            value={name}
-            label="Charakter Name"
-            onChange={(e) => setName(e.currentTarget.value)}
-          />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (name) {
+                const char = store.createCharacter(name);
+                store.selectCharacter(char.id);
+                setName('');
+                setOpen(false);
+              }
+            }}
+          >
+            <Input
+              value={name}
+              label="Charakter Name"
+              onChange={(e) => setName(e.currentTarget.value)}
+            />
 
-          <div className="flex gap-4 mt-5">
-            <Button className="w-full" type="submit" color="green">
-              Charakter erstellen
-            </Button>
-            {store.selectedID && (
-              <Button className="w-full" color="red">
-                {t('cancel')}
+            <div className="flex gap-4 mt-5">
+              <Button className="w-full" type="submit" color="green">
+                Charakter erstellen
               </Button>
-            )}
-          </div>
-        </form>
+              {store.selectedID && (
+                <Button className="w-full" color="red">
+                  {t('cancel')}
+                </Button>
+              )}
+            </div>
+          </form>
+        </div>
       </Modal>
       {store.selectedID && <Character />}
     </>

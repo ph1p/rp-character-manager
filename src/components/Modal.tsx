@@ -16,7 +16,7 @@ export const Modal: FunctionComponent<{
           }
         }}
       >
-        <div className="bg-white p-5 w-96 mx-auto self-center rounded-md">
+        <div className="bg-white p-5 mx-auto self-center rounded-md">
           {props.children}
         </div>
       </div>
