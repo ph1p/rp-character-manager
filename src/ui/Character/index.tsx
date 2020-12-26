@@ -21,16 +21,16 @@ const NameComponent = observer(() => {
     <>
       {character.editMode ? (
         <Input
-          className="mr-4 w-24 ml-4 sm:ml-0"
+          className="mr-4 w-24 ml-4 md:ml-0"
           type="text"
           label="Name"
           defaultValue={character.name}
           onInput={(e) => character.setName(e.currentTarget.value)}
         />
       ) : (
-        <div className="text-xl appearance-none cursor-pointer bg-green-600 text-white -mt-3 sm:-my-3 py-6 px-4 sm:mr-4">
+        <div className="text-xl appearance-none cursor-pointer bg-green-600 text-white -mt-3 md:-my-3 py-6 px-4 md:mr-4">
           <select
-            className="text-xl appearance-none cursor-pointer bg-transparent w-full sm:w-auto"
+            className="text-xl appearance-none cursor-pointer bg-transparent w-full md:w-auto"
             value={store.selectedID}
             onChange={(e) => store.selectCharacter(e.currentTarget.value)}
           >
@@ -225,16 +225,16 @@ export const Character = observer(() => {
         <NotesComponent />
       </Modal>
 
-      <div className="sm:sticky top-0 flex w-full bg-white sm:px-5 py-3">
-        <div className="sm:flex w-full">
+      <div className="md:sticky top-0 flex w-full bg-white md:px-5 py-3">
+        <div className="md:flex w-full">
           <NameComponent />
-          <div className="sm:grid p-4 lg:p-0 lg:flex h-full w-full items-center">
+          <div className="md:grid p-4 lg:p-0 lg:flex h-full w-full items-center">
             <ArmorClassComponent />
             <InitiativeComponent />
             <MovementComponent />
             <ProficiencyBonusComponent />
 
-            <div className="flex ml-auto mt-4 sm:mt-0">
+            <div className="flex ml-auto mt-4 md:mt-0">
               <Button onClick={() => setNotesOpen(true)} color="yellow">
                 Notizen ({character.notes.values.length})
               </Button>
