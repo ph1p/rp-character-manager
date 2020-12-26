@@ -21,7 +21,7 @@ const NameComponent = observer(() => {
     <>
       {character.editMode ? (
         <Input
-          className="mr-4"
+          className="mr-4 w-24"
           type="text"
           label="Name"
           defaultValue={character.name}
@@ -85,6 +85,7 @@ const ProficiencyBonusComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
+          className="w-44 mr-4"
           type="text"
           label={t('proficiency-bonus')}
           defaultValue={store.proficiencyBonus}
@@ -103,7 +104,7 @@ const ProficiencyBonusComponent = observer(() => {
 });
 
 const CharacterValue = (props: any) => (
-  <div>
+  <div className="mr-4">
     <span className="text-xl">{props.value}</span>
     {props.description && (
       <p className="text-gray-500 text-sm uppercase">{props.description}</p>
@@ -119,6 +120,7 @@ const InitiativeComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
+          className="w-44 mr-4"
           type="text"
           label={t('initiative')}
           defaultValue={store.initiative}
@@ -144,6 +146,7 @@ const ArmorClassComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
+          className="w-44 mr-4"
           type="text"
           label={t('armor-class')}
           defaultValue={store.armorClass}
@@ -169,8 +172,9 @@ const MovementComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
+          className="w-44 mr-4"
           type="text"
-          label={t('armor-class')}
+          label={t('movement')}
           defaultValue={store.movement}
           onInput={(e) =>
             store.setMovement(parseInt(e.currentTarget.value, 10))
@@ -224,26 +228,25 @@ export const Character = observer(() => {
       <div className="sticky top-0 flex w-full bg-white mb-4 px-5 py-3 gap-4">
         <div className="flex w-full">
           <NameComponent />
-          <div className="flex gap-4 h-full w-full items-center">
+          <div className="flex h-full w-full items-center">
             <ArmorClassComponent />
             <InitiativeComponent />
             <MovementComponent />
             <ProficiencyBonusComponent />
 
-            <Button
-              className="ml-auto"
-              onClick={() => setNotesOpen(true)}
-              color="yellow"
-            >
-              Notizen
-            </Button>
-            <Button
-              filled
-              color={character.editMode ? 'green' : 'gray'}
-              onClick={() => character.toggleEditMode()}
-            >
-              {character.editMode ? t('ready') : t('edit')}
-            </Button>
+            <div className="flex ml-auto">
+              <Button onClick={() => setNotesOpen(true)} color="yellow">
+                Notizen ({character.notes.values.length})
+              </Button>
+              <Button
+                filled
+                className="ml-3"
+                color={character.editMode ? 'green' : 'gray'}
+                onClick={() => character.toggleEditMode()}
+              >
+                {character.editMode ? t('ready') : t('edit')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

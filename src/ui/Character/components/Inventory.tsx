@@ -124,19 +124,19 @@ export const InventoryComponent = observer(() => {
       </div>
       <div className="bg-white p-5 rounded-md mt-5">
         <form className="w-full max-w-lg" onSubmit={addItem}>
-          <div className="flex gap-3">
+          <div className="flex">
             <Input
               label="Name"
               type="text"
               name="name"
-              className="flex-grow w-24"
+              className="flex-grow w-24 mr-4"
               value={formItem.name}
               onChange={onChange}
             />
 
             <Input
               label="Anzahl"
-              type="text"
+              type="number"
               name="quantity"
               className="flex-none w-14"
               placeholder="default: 1"
