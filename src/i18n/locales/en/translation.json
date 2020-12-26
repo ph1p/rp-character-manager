@@ -1,0 +1,49 @@
+{
+  "name": "Name",
+  "hitpoints": "Hitpoints",
+  "saving-throw": "Saving Throw",
+  "saving-throws": "Saving Throws",
+  "armor-class": "Armor Class",
+  "initiative": "Initiative",
+  "movement": "Movement Rate",
+  "proficiency-bonus": "Proficiency Bonus",
+  "cancel": "Cancel",
+  "save": "Save",
+  "ready": "Ready",
+  "edit": "Edit",
+  "remove": "Remove",
+  "attribute": {
+    "strength": "Strength",
+    "dexterity": "Dexterity",
+    "constitution": "Constitution",
+    "intelligence": "Intelligence",
+    "wisdom": "Wisdom",
+    "charisma": "Charisma"
+  },
+  "skill": {
+    "acrobatics": "Acrobatics",
+    "arcana": "Arcana Kunde",
+    "athletics": "Athletics",
+    "performance": "Performance",
+    "intimidation": "Intimidation",
+    "sleightOfHand": "Sleight of hand",
+    "history": "History",
+    "medicine": "Medicine",
+    "stealth": "Stealth",
+    "animalHandling": "Animal Handling",
+    "insight": "Insight erkennen",
+    "investigation": "Investigation",
+    "nature": "Nature",
+    "religion": "Religion",
+    "deception": "Deception",
+    "survival": "Survival",
+    "persuasion": "Persuasion",
+    "perception": "Perception"
+  },
+  "inventory": {
+    "add-item": "Add Item"
+  },
+  "notes": {
+    "add-note": "Add Note"
+  }
+}

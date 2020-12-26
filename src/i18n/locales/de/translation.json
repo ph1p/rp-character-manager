@@ -1,0 +1,49 @@
+{
+  "name": "Name",
+  "hitpoints": "Trefferpunkte",
+  "saving-throw": "Rettungswurf",
+  "saving-throws": "Rettungswürfe",
+  "armor-class": "Rüstungsklasse",
+  "initiative": "Initiative",
+  "movement": "Bewegungsrate",
+  "proficiency-bonus": "Übungsbonus",
+  "cancel": "Abbrechen",
+  "save": "Speichern",
+  "ready": "Fertig",
+  "edit": "Bearbeiten",
+  "remove": "Entfernen",
+  "attribute": {
+    "strength": "Stärke",
+    "dexterity": "Geschicklichkeit",
+    "constitution": "Konstitution",
+    "intelligence": "Intelligenz",
+    "wisdom": "Weisheit",
+    "charisma": "Charisma"
+  },
+  "skill": {
+    "acrobatics": "Akrobatik",
+    "arcana": "Arkane Kunde",
+    "athletics": "Athletik",
+    "performance": "Auftreten",
+    "intimidation": "Einschüchtern",
+    "sleightOfHand": "Fingerfertigkeit",
+    "history": "Geschichte",
+    "medicine": "Heilkunde",
+    "stealth": "Heimlichkeit",
+    "animalHandling": "Mit Tieren umgehen",
+    "insight": "Motiv erkennen",
+    "investigation": "Nachforschungen",
+    "nature": "Naturkunde",
+    "religion": "Religion",
+    "deception": "Täuschen",
+    "survival": "Überlebenskunst",
+    "persuasion": "Überzeugen",
+    "perception": "Wahrnehmung"
+  },
+  "inventory": {
+    "add-item": "Gegenstand hinzufügen"
+  },
+  "notes": {
+    "add-note": "Notiz hinzufügen"
+  }
+}
