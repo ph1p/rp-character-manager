@@ -12,6 +12,7 @@
   "ready": "Fertig",
   "edit": "Bearbeiten",
   "remove": "Entfernen",
+  "download-character": "Charakter herunterladen",
   "attribute": {
     "strength": "Stärke",
     "dexterity": "Geschicklichkeit",
@@ -44,8 +45,8 @@
     "add-item": "Gegenstand hinzufügen"
   },
   "notes": {
-    "singular":"Notiz",
-    "plural":"Notizen",
+    "singular": "Notiz",
+    "plural": "Notizen",
     "add-note": "Notiz hinzufügen"
   }
 }

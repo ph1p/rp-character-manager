@@ -12,6 +12,7 @@
   "ready": "Ready",
   "edit": "Edit",
   "remove": "Remove",
+  "download-character": "Download Character",
   "attribute": {
     "strength": "Strength",
     "dexterity": "Dexterity",
@@ -44,8 +45,8 @@
     "add-item": "Add Item"
   },
   "notes": {
-    "singular":"Note",
-    "plural":"Notes",
+    "singular": "Note",
+    "plural": "Notes",
     "add-note": "Add Note"
   }
 }

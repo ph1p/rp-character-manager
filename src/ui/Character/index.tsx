@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { toJS } from 'mobx';
 
+import { CharacterStore } from '../../store/character';
 import { useCharacterStore, useStore } from '../../store';
 import { Modal } from '../../components/Modal';
 import { Input } from '../../components/Input';
@@ -214,6 +216,30 @@ const RemoveCharacter = observer(() => {
   );
 });
 
+const DownloadComponent = () => {
+  const { t } = useTranslation();
+  const character = useCharacterStore();
+
+  const downloadCharacter = (character: CharacterStore) => {
+    const data = `data:${`text/json;charset=utf-8,${encodeURIComponent(
+      JSON.stringify(toJS(character))
+    )}`}`;
+    const anchor = document.createElement('a');
+    anchor.href = 'data:' + data;
+    anchor.download = `${character.id}.json`;
+    anchor.click();
+    anchor.remove();
+  };
+
+  return (
+    <div className="bg-white p-5 rounded-md mt-5">
+      <Button full onClick={() => downloadCharacter(character)}>
+        {t('download-character')}
+      </Button>
+    </div>
+  );
+};
+
 export const Character = observer(() => {
   const { t } = useTranslation();
   const character = useCharacterStore();
@@ -267,6 +293,8 @@ export const Character = observer(() => {
           <div>
             <InventoryComponent />
             <RemoveCharacter />
+
+            <DownloadComponent />
           </div>
         </>
       </div>
