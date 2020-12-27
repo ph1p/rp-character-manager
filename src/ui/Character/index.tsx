@@ -7,6 +7,7 @@ import { CharacterStore } from '../../store/character';
 import { useCharacterStore, useStore } from '../../store';
 import { Modal } from '../../components/Modal';
 import { Input } from '../../components/Input';
+import { ContentBox } from '../../components/ContentBox';
 import { Button } from '../../components/Button';
 
 import { SkillsComponent } from './components/Skills';
@@ -23,16 +24,16 @@ const NameComponent = observer(() => {
     <>
       {character.editMode ? (
         <Input
-          className="mr-4 w-24 ml-4 md:ml-0"
+          className="mr-4 w-24 ml-4 lg:ml-0"
           type="text"
           label="Name"
           defaultValue={character.name}
           onInput={(e) => character.setName(e.currentTarget.value)}
         />
       ) : (
-        <div className="text-xl appearance-none cursor-pointer bg-green-600 text-white -mt-3 md:-my-3 py-6 px-4 md:mr-4">
+        <div className="bg-green-600 text-white lg:mr-4 px-4">
           <select
-            className="text-xl appearance-none cursor-pointer bg-transparent w-full md:w-auto"
+            className="py-4 text-xl appearance-none cursor-pointer bg-transparent w-full lg:w-auto"
             value={store.selectedID}
             onChange={(e) => store.selectCharacter(e.currentTarget.value)}
           >
@@ -196,7 +197,7 @@ const RemoveCharacter = observer(() => {
   return (
     <>
       {character.editMode && (
-        <div className="bg-white p-5 rounded-md mt-5">
+        <ContentBox className="mt-5">
           <Button
             type="submit"
             onClick={() => {
@@ -210,7 +211,7 @@ const RemoveCharacter = observer(() => {
           >
             Charakter löschen
           </Button>
-        </div>
+        </ContentBox>
       )}
     </>
   );
@@ -232,11 +233,11 @@ const DownloadComponent = () => {
   };
 
   return (
-    <div className="bg-white p-5 rounded-md mt-5">
+    <ContentBox className="mt-5">
       <Button full onClick={() => downloadCharacter(character)}>
         {t('download-character')}
       </Button>
-    </div>
+    </ContentBox>
   );
 };
 
@@ -251,41 +252,48 @@ export const Character = observer(() => {
         <NotesComponent />
       </Modal>
 
-      <div className="md:sticky top-0 flex w-full bg-white md:px-5 py-3">
-        <div className="md:flex w-full">
+      <div className="top-0 flex w-full bg-white lg:sticky">
+        <div className="w-full lg:flex">
           <NameComponent />
-          <div className="md:grid p-4 lg:p-0 lg:flex h-full w-full items-center">
+          <div className="grid grid-cols-2 p-4 w-full items-center py-3 lg:px-5 lg:p-0 lg:flex lg:h-full">
             <ArmorClassComponent />
             <InitiativeComponent />
             <MovementComponent />
             <ProficiencyBonusComponent />
 
-            <div className="flex ml-auto mt-4 md:mt-0">
-              <Button onClick={() => setNotesOpen(true)} color="yellow">
+            <div
+              className="flex mt-4 lg:mt-0 lg:ml-auto"
+              style={{ gridColumn: '2 span' }}
+            >
+              <Button
+                className="w-full lg:w-auto"
+                onClick={() => setNotesOpen(true)}
+                color="yellow"
+              >
                 {t('notes.plural')} ({character.notes.values.length})
               </Button>
               <Button
                 filled
-                className="ml-3"
+                className="w-full mx-0 ml-4 lg:mx-4 lg:w-auto"
                 color={character.editMode ? 'green' : 'gray'}
                 onClick={() => character.toggleEditMode()}
               >
-                {character.editMode ? t('ready') : t('edit')}
+                {t(character.editMode ? 'ready' : 'edit')}
               </Button>
             </div>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-4">
+      <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-3">
         <>
           <div className="flex flex-col gap-4">
-            <div className="bg-white p-5 rounded-md">
+            <ContentBox>
               <HitpointsComponent />
-            </div>
-            <div className="grid grid-cols-2 gap-4 bg-white p-5 rounded-md">
+            </ContentBox>
+            <ContentBox className="grid grid-cols-2 gap-4">
               <AttributesComponent />
               <SavingThrowsComponent />
-            </div>
+            </ContentBox>
           </div>
           <div>
             <SkillsComponent />

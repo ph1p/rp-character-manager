@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { useCharacterStore } from '../../../store';
 import { Input } from '../../../components/Input';
+import { ContentBox } from '../../../components/ContentBox';
 import { Checkbox } from '../../../components/Checkbox';
 
 export const SkillsComponent = observer(() => {
@@ -10,7 +11,7 @@ export const SkillsComponent = observer(() => {
   const store = useCharacterStore();
 
   return (
-    <div className="bg-white p-4 rounded-md">
+    <ContentBox>
       <h3 className="text-2xl mb-3">Skills</h3>
       <div className="grid gap-2">
         {store.skills.values
@@ -52,6 +53,6 @@ export const SkillsComponent = observer(() => {
             </div>
           ))}
       </div>
-    </div>
+    </ContentBox>
   );
 });
