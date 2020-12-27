@@ -13,13 +13,14 @@ import { PencilIcon } from '../../../components/icons/Pencil';
 
 const InventoryItem: FunctionComponent<{
   item: TInventoryItem;
-}> = observer(({ item }) => {
+  remove: (id: string) => void;
+}> = observer(({ item, remove }) => {
   const { t } = useTranslation();
   const [edit, setEdit] = useState(false);
   const [newName, setNewName] = useState(item.name);
 
   return (
-    <div className="cursor-pointer w-full border-gray-100 rounded-md border-b mb-2 last:border-0 last:-mb-2">
+    <div className="cursor-pointer w-full border-gray-100 rounded-md border-b mb-2 pb-2 last:border-0 last:-mb-2">
       <div className="flex w-full items-center py-2 border-transparent">
         {!edit && (
           <div onClick={() => setEdit(true)} className="h-5 w-5 ml-2 mr-3">
@@ -31,7 +32,7 @@ const InventoryItem: FunctionComponent<{
             item.name
           ) : (
             <Input
-              className="-mt-1"
+              className="mb-2"
               label="Name"
               defaultValue={newName}
               onChange={(e) => setNewName(e.currentTarget.value)}
@@ -80,7 +81,7 @@ const InventoryItem: FunctionComponent<{
           </button>
           <button
             className="ml-auto border border-red-500 text-red-500 py-1 px-3 text-xs rounded"
-            onClick={() => window.confirm('Wirklich?') && item.remove()}
+            onClick={() => window.confirm('Wirklich?') && remove(item.id)}
           >
             {t('remove')}
           </button>
@@ -116,9 +117,13 @@ export const InventoryComponent = observer(() => {
     <div>
       <div className="bg-white p-5 rounded-md">
         <h2 className="text-xl">Inventar</h2>
-        <div style={{ maxHeight: 300 }} className="overflow-y-auto">
+        <div style={{ maxHeight: 300 }} className="mt-3 overflow-y-auto">
           {store.inventory.items.map((item) => (
-            <InventoryItem key={item.id} item={item} />
+            <InventoryItem
+              key={item.id}
+              item={item}
+              remove={(id) => store.inventory.remove(id)}
+            />
           ))}
         </div>
       </div>

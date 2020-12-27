@@ -10,7 +10,6 @@ export class InventoryItem {
   @persist isAttack: boolean = false;
 
   constructor(
-    private inventoryStore: InventoryStore,
     item?: InventoryItem
   ) {
     makeAutoObservable(this);
@@ -33,13 +32,6 @@ export class InventoryItem {
 
   decrease() {
     this.quantity -= 1;
-    if (this.quantity <= 0) {
-      this.remove();
-    }
-  }
-
-  remove() {
-    this.inventoryStore.items = this.inventoryStore.items.filter((i) => i.id !== this.id);
   }
 }
 
@@ -51,9 +43,13 @@ export class InventoryStore {
     makeAutoObservable(this);
   }
 
+  remove(id: string) {
+    this.items = this.items.filter((i) => i.id !== id);
+  }
+
   createItem(data: InventoryItem) {
     if (data.name && !this.items.some(item => item.name === data.name)) {
-      const item = new InventoryItem(this, data);
+      const item = new InventoryItem(data);
 
       this.items.push(item);
 
