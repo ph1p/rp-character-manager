@@ -11,6 +11,7 @@ import { ContentBox } from '../../components/ContentBox';
 import { Button } from '../../components/Button';
 
 import { SkillsComponent } from './components/Skills';
+import { SavingThrowsComponent } from './components/SavingThrows';
 import { NotesComponent } from './components/Notes';
 import { InventoryComponent } from './components/Inventory';
 import { HitpointsComponent } from './components/Hitpoints';
@@ -47,36 +48,6 @@ const NameComponent = observer(() => {
         </div>
       )}
     </>
-  );
-});
-
-const SavingThrowsComponent = observer(() => {
-  const { t } = useTranslation();
-  const store = useCharacterStore();
-
-  return (
-    <div>
-      <h3 className="text-2xl mb-3">{t('saving-throws')}</h3>
-      <div className="grid gap-2">
-        {store.attributes.values.map((attribute) => (
-          <div
-            className="text-center border-gray-100 border bg-gray-50 rounded p-2"
-            key={attribute.name}
-          >
-            <div className="uppercase text-xs">
-              {t(`attribute.${attribute.name}`)}
-            </div>
-            <div
-              className={`text-2xl font-bold px-2 my-2 ${
-                attribute.isSavingThrow ? 'bg-green-500' : 'bg-gray-500'
-              } text-white inline-block rounded`}
-            >
-              {attribute.savingThrow}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 });
 

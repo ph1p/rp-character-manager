@@ -108,13 +108,16 @@ export const NotesComponent = observer(() => {
         style={{ maxHeight: 300 }}
         className="overflow-y-auto mb-5 border-b-2 pb-5 border-gray-100"
       >
-        {store.notes.values.map((note) => (
-          <NoteItem
-            key={note.id}
-            note={note}
-            remove={(id) => store.notes.remove(id)}
-          />
-        ))}
+        {store.notes.values
+          .slice()
+          .sort((b, a) => a.date - b.date)
+          .map((note) => (
+            <NoteItem
+              key={note.id}
+              note={note}
+              remove={(id) => store.notes.remove(id)}
+            />
+          ))}
       </div>
 
       <form className="w-full max-w-lg" onSubmit={addNote}>

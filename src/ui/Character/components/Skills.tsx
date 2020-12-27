@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 
+import { addSignToNumber } from '../../../utils/helpers';
 import { useCharacterStore } from '../../../store';
 import { Input } from '../../../components/Input';
 import { ContentBox } from '../../../components/ContentBox';
@@ -27,7 +28,7 @@ export const SkillsComponent = observer(() => {
                       skill.practiced ? 'green' : 'gray'
                     }-500 rounded-full`}
                   >
-                    {skill.score}
+                    {addSignToNumber(skill.score)}
                   </div>
                   <div>
                     {store.editMode ? (
@@ -41,9 +42,7 @@ export const SkillsComponent = observer(() => {
                         }
                       />
                     ) : (
-                      <>
-                        {name}
-                      </>
+                      <>{name}</>
                     )}
                   </div>
                   {store.editMode && (

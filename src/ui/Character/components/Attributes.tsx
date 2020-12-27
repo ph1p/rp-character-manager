@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 
+import { addSignToNumber } from '../../../utils/helpers';
 import { useCharacterStore } from '../../../store';
 import { Input } from '../../../components/Input';
 import { Checkbox } from '../../../components/Checkbox';
@@ -22,7 +23,7 @@ export const AttributesComponent = observer(() => {
               {t(`attribute.${attribute.name}`)}
             </div>
             <div className="text-2xl font-bold px-2 my-2 bg-green-500 text-white inline-block rounded">
-              {attribute.modifier}
+              {addSignToNumber(attribute.modifier)}
             </div>
             {store.editMode ? (
               <Input

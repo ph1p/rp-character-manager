@@ -3,6 +3,7 @@ import React, {
   ChangeEvent,
   FunctionComponent,
   SyntheticEvent,
+  useEffect,
   useState,
 } from 'react';
 import { observer } from 'mobx-react-lite';
@@ -18,6 +19,12 @@ const InventoryItem: FunctionComponent<{
   const { t } = useTranslation();
   const [edit, setEdit] = useState(false);
   const [newName, setNewName] = useState(item.name);
+
+  useEffect(() => {
+    if (item.quantity <= 0) {
+      remove(item.id);
+    }
+  }, [item.id, item.quantity, remove]);
 
   return (
     <div className="cursor-pointer w-full border-gray-100 rounded-md border-b mb-2 pb-2 last:border-0 last:-mb-2">

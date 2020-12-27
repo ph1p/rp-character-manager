@@ -1,0 +1,1 @@
+export const addSignToNumber = (num: number) => (num > 0 ? '+' : '') + num;

@@ -20,26 +20,21 @@ export class CharacterNote {
   }
 }
 
-
 export class CharacterNotesStore {
   @persist('list', CharacterNote)
-  _notes: CharacterNote[] = [];
+  values: CharacterNote[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  get values() {
-    return this._notes.slice().sort((b, a) => a.date - b.date)
-  }
-
   remove(id: string) {
-    this._notes = this._notes.filter(note => note.id !== id);
+    this.values = this.values.filter(note => note.id !== id);
   }
 
   create(text: string) {
     if (text) {
-      this._notes.push(new CharacterNote(text));
+      this.values.push(new CharacterNote(text));
     }
   }
 }
