@@ -30,19 +30,15 @@ export default observer(() => {
         <>
           <UploadComponent />
 
-          <Select
-            label="Bestehende Charaktere"
-            className="mt-5"
-            value={store.selectedID}
-            onChange={(e) => store.selectCharacter(e.currentTarget.value)}
-          >
-            <option value="">----</option>
+          <div className="mt-7 bg-gray-100 p-3">
             {store.characters.map((character) => (
-              <option value={character.id} key={character.id}>
-                {character.name}
-              </option>
+              <div className="flex py-2 px-3 cursor-pointer" key={character.id}>
+                <div onClick={() => store.selectCharacter(character.id)}>
+                  {character.name}
+                </div>
+              </div>
             ))}
-          </Select>
+          </div>
 
           <div className="h-px bg-gray-200 my-7"></div>
 
