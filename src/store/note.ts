@@ -7,16 +7,12 @@ export class CharacterNote {
   @persist text = '';
   @persist date: number;
 
-  constructor(private notesStore: CharacterNotesStore, text: string) {
+  constructor(text: string) {
     makeAutoObservable(this);
 
     this.id = uuidv4();
     this.date = new Date().getTime();
     this.text = text;
-  }
-
-  remove() {
-    this.notesStore._notes = this.notesStore._notes.filter(note => note.id !== this.id);
   }
 
   setText(text: string) {
@@ -37,9 +33,13 @@ export class CharacterNotesStore {
     return this._notes.slice().sort((b, a) => a.date - b.date)
   }
 
+  remove(id: string) {
+    this._notes = this._notes.filter(note => note.id !== id);
+  }
+
   create(text: string) {
     if (text) {
-      this._notes.push(new CharacterNote(this, text));
+      this._notes.push(new CharacterNote(text));
     }
   }
 }

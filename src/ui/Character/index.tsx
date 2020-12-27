@@ -256,7 +256,7 @@ export const Character = observer(() => {
         <NotesComponent />
       </Modal>
 
-      <div className="top-0 flex w-full bg-white lg:sticky">
+      <div className="top-0 flex w-full bg-white lg:shadow-sm lg:sticky">
         <div className="w-full lg:flex">
           <NameComponent />
           <div className="grid gap-4 grid-cols-2 p-4 w-full items-center lg:gap-0 lg:py-3 lg:px-0 lg:flex lg:h-full">

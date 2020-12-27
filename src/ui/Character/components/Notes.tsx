@@ -10,10 +10,11 @@ import { PencilIcon } from '../../../components/icons/Pencil';
 
 const NoteItem: FunctionComponent<{
   note: CharacterNote;
-}> = observer(({ note }) => {
+  remove: (id: string) => void;
+}> = observer((props) => {
   const { t } = useTranslation();
   const [edit, setEdit] = useState(false);
-  const [newText, setNewText] = useState(note.text);
+  const [newText, setNewText] = useState(props.note.text);
 
   return (
     <div className="cursor-pointer w-full border-gray-100 rounded border-b mb-2 last:border-0 last:-mb-2">
@@ -29,7 +30,7 @@ const NoteItem: FunctionComponent<{
         <div className="w-full">
           <div>
             {!edit ? (
-              note.text.split('\n').map((item, key) => {
+              props.note.text.split('\n').map((item, key) => {
                 return (
                   <span key={key}>
                     {item}
@@ -49,7 +50,7 @@ const NoteItem: FunctionComponent<{
           <div className="text-xs truncate w-full normal-case font-normal -mt-1 text-gray-500">
             {!edit && (
               <p className="text-xs mt-2">
-                {format(note.date, 'dd.MM.yyyy - HH:mm')}
+                {format(props.note.date, 'dd.MM.yyyy - HH:mm')}
               </p>
             )}
           </div>
@@ -62,7 +63,7 @@ const NoteItem: FunctionComponent<{
             onClick={() => {
               setEdit(false);
               if (newText) {
-                note.setText(newText);
+                props.note.setText(newText);
               }
             }}
           >
@@ -77,7 +78,9 @@ const NoteItem: FunctionComponent<{
           </button>
           <button
             className="ml-auto bg-red-700 text-white py-1 px-3 text-xs rounded"
-            onClick={() => window.confirm('Wirklich?') && note.remove()}
+            onClick={() =>
+              window.confirm('Wirklich?') && props.remove(props.note.id)
+            }
           >
             {t('remove')}
           </button>
@@ -106,7 +109,11 @@ export const NotesComponent = observer(() => {
         className="overflow-y-auto mb-5 border-b-2 pb-5 border-gray-100"
       >
         {store.notes.values.map((note) => (
-          <NoteItem key={note.id} note={note} />
+          <NoteItem
+            key={note.id}
+            note={note}
+            remove={(id) => store.notes.remove(id)}
+          />
         ))}
       </div>
 
