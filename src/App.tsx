@@ -21,8 +21,12 @@ export default observer(() => {
 
   return (
     <>
-      <Modal open={open} onClose={() => store.selectedID && setOpen(!open)}>
-        <div style={{ width: 300 }}>
+      <Modal
+        className="w-3/4 lg:w-1/3"
+        open={open}
+        onClose={() => store.selectedID && setOpen(!open)}
+      >
+        <>
           <Select
             label="Bestehende Charaktere"
             value={store.selectedID}
@@ -66,7 +70,7 @@ export default observer(() => {
               )}
             </div>
           </form>
-        </div>
+        </>
       </Modal>
       {store.selectedID && <Character />}
     </>

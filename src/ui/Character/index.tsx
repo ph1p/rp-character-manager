@@ -248,7 +248,11 @@ export const Character = observer(() => {
 
   return (
     <>
-      <Modal open={openNotes} onClose={() => setNotesOpen(!openNotes)}>
+      <Modal
+        className="w-3/4 lg:w-1/3"
+        open={openNotes}
+        onClose={() => setNotesOpen(!openNotes)}
+      >
         <NotesComponent />
       </Modal>
 

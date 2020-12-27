@@ -99,7 +99,7 @@ export const NotesComponent = observer(() => {
   };
 
   return (
-    <div style={{ width: 500 }}>
+    <>
       <h2 className="text-xl mb-2">{t('notes.plural')}</h2>
       <div
         style={{ maxHeight: 300 }}
@@ -127,6 +127,6 @@ export const NotesComponent = observer(() => {
           {t('notes.add-note')}
         </button>
       </form>
-    </div>
+    </>
   );
 });

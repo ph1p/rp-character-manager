@@ -3,6 +3,7 @@ import { FunctionComponent, useRef } from 'react';
 export const Modal: FunctionComponent<{
   onClose: () => void;
   open: boolean;
+  className?: string;
 }> = (props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   return props.open ? (
@@ -16,7 +17,11 @@ export const Modal: FunctionComponent<{
           }
         }}
       >
-        <div className="bg-white p-5 mx-auto self-center rounded-md">
+        <div
+          className={`bg-white p-5 mx-auto self-center rounded-md ${
+            props.className || ''
+          }`}
+        >
           {props.children}
         </div>
       </div>
