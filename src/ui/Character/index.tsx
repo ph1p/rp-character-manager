@@ -24,16 +24,16 @@ const NameComponent = observer(() => {
     <>
       {character.editMode ? (
         <Input
-          className="mr-4 w-24 ml-4 lg:ml-0"
+          className="mr-4 w-24 ml-4 lg:py-3 lg:px-0"
           type="text"
           label="Name"
           defaultValue={character.name}
           onInput={(e) => character.setName(e.currentTarget.value)}
         />
       ) : (
-        <div className="bg-green-600 text-white lg:mr-4 px-4">
+        <div className="bg-green-600 text-white px-5 lg:mr-4 lg:ml-0">
           <select
-            className="py-4 text-xl appearance-none cursor-pointer bg-transparent w-full lg:w-auto"
+            className="py-6 text-xl appearance-none cursor-pointer bg-transparent w-full lg:w-auto"
             value={store.selectedID}
             onChange={(e) => store.selectCharacter(e.currentTarget.value)}
           >
@@ -255,7 +255,7 @@ export const Character = observer(() => {
       <div className="top-0 flex w-full bg-white lg:sticky">
         <div className="w-full lg:flex">
           <NameComponent />
-          <div className="grid grid-cols-2 p-4 w-full items-center py-3 lg:px-5 lg:p-0 lg:flex lg:h-full">
+          <div className="grid grid-cols-2 p-4 w-full items-center lg:py-3 lg:px-0 lg:flex lg:h-full">
             <ArmorClassComponent />
             <InitiativeComponent />
             <MovementComponent />

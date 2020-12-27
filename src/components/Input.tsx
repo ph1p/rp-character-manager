@@ -9,7 +9,7 @@ export const Input: FunctionComponent<
     <div className={props.className || 'w-full'}>
       {props.label && (
         <label
-          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
           htmlFor={id.current}
         >
           {props.label}
@@ -18,7 +18,7 @@ export const Input: FunctionComponent<
       <input
         {...props}
         defaultValue={props?.defaultValue?.toString()}
-        className={`appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-3 text-sm mb-3 leading-tight focus:outline-none focus:bg-white`}
+        className={`appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-3 text-sm leading-tight focus:outline-none focus:bg-white`}
         id={id.current}
       />
     </div>

@@ -147,7 +147,7 @@ export const InventoryComponent = observer(() => {
 
           <button
             type="submit"
-            className="w-full mr-5 bg-blue-700 text-white py-2 px-6 text-sm rounded"
+            className="w-full mr-5 mt-4 bg-blue-700 text-white py-2 px-6 text-sm rounded"
           >
             {t('inventory.add-item')}
           </button>
