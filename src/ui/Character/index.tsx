@@ -220,7 +220,7 @@ export const Character = observer(() => {
   return (
     <>
       <Modal
-        className="w-3/4 lg:w-1/3"
+        className="w-5/6 lg:w-1/2"
         open={openNotes}
         onClose={() => setNotesOpen(!openNotes)}
       >

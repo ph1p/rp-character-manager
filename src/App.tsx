@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Character } from './ui/Character';
 import { useStore } from './store';
+import { UploadComponent } from './components/UploadCharacter';
 import { Select } from './components/Select';
 import { Modal } from './components/Modal';
 import { Input } from './components/Input';
@@ -27,8 +28,11 @@ export default observer(() => {
         onClose={() => store.selectedID && setOpen(!open)}
       >
         <>
+          <UploadComponent />
+
           <Select
             label="Bestehende Charaktere"
+            className="mt-5"
             value={store.selectedID}
             onChange={(e) => store.selectCharacter(e.currentTarget.value)}
           >

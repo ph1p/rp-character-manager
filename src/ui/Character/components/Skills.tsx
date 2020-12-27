@@ -13,13 +13,15 @@ export const SkillsComponent = observer(() => {
 
   return (
     <ContentBox>
-      <h3 className="text-2xl mb-3">Skills</h3>
+      <h3 className="text-2xl mb-3">{t('skills')}</h3>
       <div className="grid gap-2">
         {store.skills.values
           .slice()
           .sort((skill) => ~Number(skill.practiced) + 1)
           .map((skill) => {
-            const name = `${t(`skill.${skill.name}`)} (${t(`attribute.${skill.attribute}`).substr(0, 3)})`
+            const name = `${t(`skill.${skill.name}`)} (${t(
+              `attribute.${skill.attribute}`
+            ).substr(0, 3)})`;
             return (
               <div key={skill.name} className="w-full">
                 <div className="flex items-center w-full">
@@ -48,7 +50,7 @@ export const SkillsComponent = observer(() => {
                   {store.editMode && (
                     <Checkbox
                       className="ml-auto"
-                      label="ist geübt"
+                      label={t('practiced')}
                       checked={skill.practiced}
                       onChange={() => skill.togglePracticed()}
                     />

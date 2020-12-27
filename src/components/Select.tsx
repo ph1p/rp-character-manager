@@ -33,7 +33,7 @@ export const Select: FunctionComponent<
         <select
           {...props}
           defaultValue={props?.defaultValue?.toString()}
-          className={`appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-3 text-sm mb-3 leading-tight focus:outline-none focus:bg-white ${props.className}`}
+          className={`appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-3 text-sm mb-3 leading-tight focus:outline-none focus:bg-white`}
           id={id.current}
         >
           {props.children}

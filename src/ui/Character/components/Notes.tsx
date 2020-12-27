@@ -7,6 +7,7 @@ import { CharacterNote } from '../../../store/note';
 import { useCharacterStore } from '../../../store';
 import { Textarea } from '../../../components/Textarea';
 import { PencilIcon } from '../../../components/icons/Pencil';
+import { Button } from '../../../components/Button';
 
 const NoteItem: FunctionComponent<{
   note: CharacterNote;
@@ -18,12 +19,12 @@ const NoteItem: FunctionComponent<{
 
   return (
     <div className="cursor-pointer w-full border-gray-100 rounded border-b mb-2 last:border-0 last:-mb-2">
-      <div className="flex w-full items-center py-2 border-transparent relative">
+      <div
+        className="flex w-full items-center py-2 border-transparent relative"
+        onClick={() => !edit && setEdit(true)}
+      >
         {!edit && (
-          <div
-            onClick={() => setEdit(true)}
-            className="h-4 w-4 ml-2 mr-3 absolute top-2 right-0"
-          >
+          <div className="h-4 w-4 ml-2 mr-3 absolute top-2 right-0">
             <PencilIcon />
           </div>
         )}
@@ -40,7 +41,7 @@ const NoteItem: FunctionComponent<{
               })
             ) : (
               <Textarea
-                label="Name"
+                rows={5}
                 className="w-full -mt-1"
                 defaultValue={newText}
                 onChange={(e) => setNewText(e.currentTarget.value)}
@@ -58,8 +59,11 @@ const NoteItem: FunctionComponent<{
       </div>
       {edit && (
         <div className="flex mb-3">
-          <button
-            className="mr-3 bg-green-500 text-white py-1 px-3 text-xs rounded"
+          <Button
+            small
+            filled
+            color="green"
+            className="mr-2"
             onClick={() => {
               setEdit(false);
               if (newText) {
@@ -68,22 +72,21 @@ const NoteItem: FunctionComponent<{
             }}
           >
             {t('save')}
-          </button>
+          </Button>
 
-          <button
-            className="bg-gray-400 text-white py-1 px-3 text-xs rounded"
-            onClick={() => setEdit(false)}
-          >
+          <Button filled small onClick={() => setEdit(false)}>
             {t('cancel')}
-          </button>
-          <button
-            className="ml-auto bg-red-700 text-white py-1 px-3 text-xs rounded"
+          </Button>
+          <Button
+            className="ml-auto"
+            small
+            color="red"
             onClick={() =>
               window.confirm('Wirklich?') && props.remove(props.note.id)
             }
           >
             {t('remove')}
-          </button>
+          </Button>
         </div>
       )}
     </div>
@@ -120,22 +123,17 @@ export const NotesComponent = observer(() => {
           ))}
       </div>
 
-      <form className="w-full max-w-lg" onSubmit={addNote}>
-        <div className="flex gap-3">
-          <Textarea
-            label={t('notes.singular')}
-            className="flex-grow w-24"
-            value={text}
-            onChange={(e) => setText(e.currentTarget.value)}
-          />
-        </div>
+      <form className="w-full" onSubmit={addNote}>
+        <Textarea
+          rows={5}
+          label={t('notes.singular')}
+          value={text}
+          onChange={(e) => setText(e.currentTarget.value)}
+        />
 
-        <button
-          type="submit"
-          className="w-full mr-5 bg-blue-700 text-white py-2 px-6 text-sm rounded"
-        >
+        <Button type="submit" full filled color="yellow">
           {t('notes.add-note')}
-        </button>
+        </Button>
       </form>
     </>
   );

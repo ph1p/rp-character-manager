@@ -7,11 +7,11 @@ export class CharacterNote {
   @persist text = '';
   @persist date: number;
 
-  constructor(text: string) {
+  constructor(text: string, date?: number, id?: string) {
     makeAutoObservable(this);
 
-    this.id = uuidv4();
-    this.date = new Date().getTime();
+    this.id = id || uuidv4();
+    this.date = date || new Date().getTime();
     this.text = text;
   }
 
@@ -32,9 +32,9 @@ export class CharacterNotesStore {
     this.values = this.values.filter(note => note.id !== id);
   }
 
-  create(text: string) {
+  create(text: string, date?: number, id?: string) {
     if (text) {
-      this.values.push(new CharacterNote(text));
+      this.values.push(new CharacterNote(text, date, id));
     }
   }
 }

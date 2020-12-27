@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite';
 import { TInventoryItem, useCharacterStore } from '../../../store';
 import { Input } from '../../../components/Input';
 import { PencilIcon } from '../../../components/icons/Pencil';
+import { Button } from '../../../components/Button';
 
 const InventoryItem: FunctionComponent<{
   item: TInventoryItem;
@@ -68,8 +69,11 @@ const InventoryItem: FunctionComponent<{
       </div>
       {edit && (
         <div className="flex mb-3">
-          <button
-            className="mr-3 border border-green-500 text-green-500 py-1 px-3 text-xs rounded"
+          <Button
+            small
+            filled
+            color="green"
+            className="mr-2"
             onClick={() => {
               setEdit(false);
               if (newName) {
@@ -78,20 +82,19 @@ const InventoryItem: FunctionComponent<{
             }}
           >
             {t('save')}
-          </button>
+          </Button>
 
-          <button
-            className="border border-gray-500 text-gray-500 py-1 px-3 text-xs rounded"
-            onClick={() => setEdit(false)}
-          >
+          <Button filled small onClick={() => setEdit(false)}>
             {t('cancel')}
-          </button>
-          <button
-            className="ml-auto border border-red-500 text-red-500 py-1 px-3 text-xs rounded"
+          </Button>
+          <Button
+            className="ml-auto"
+            small
+            color="red"
             onClick={() => window.confirm('Wirklich?') && remove(item.id)}
           >
             {t('remove')}
-          </button>
+          </Button>
         </div>
       )}
     </div>
