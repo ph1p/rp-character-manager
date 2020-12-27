@@ -24,7 +24,7 @@ const NameComponent = observer(() => {
     <>
       {character.editMode ? (
         <Input
-          className="mr-4 w-24 ml-4 lg:py-3 lg:px-0"
+          className="mr-4 w-auto ml-4 mt-4 lg:mt-0 lg:py-3 lg:px-0 lg:w-44"
           type="text"
           label="Name"
           defaultValue={character.name}
@@ -88,7 +88,7 @@ const ProficiencyBonusComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
-          className="w-44 mr-4"
+          className="mr-4 w-full lg:w-44"
           type="text"
           label={t('proficiency-bonus')}
           defaultValue={store.proficiencyBonus}
@@ -123,7 +123,7 @@ const InitiativeComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
-          className="w-44 mr-4"
+          className="mr-4 w-full lg:w-44 lg:mb-0"
           type="text"
           label={t('initiative')}
           defaultValue={store.initiative}
@@ -149,7 +149,7 @@ const ArmorClassComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
-          className="w-44 mr-4"
+          className="mr-4 w-full lg:w-44 lg:mb-0"
           type="text"
           label={t('armor-class')}
           defaultValue={store.armorClass}
@@ -175,7 +175,7 @@ const MovementComponent = observer(() => {
     <>
       {store.editMode ? (
         <Input
-          className="w-44 mr-4"
+          className="mr-4 w-full lg:w-44"
           type="text"
           label={t('movement')}
           defaultValue={store.movement}
@@ -255,14 +255,14 @@ export const Character = observer(() => {
       <div className="top-0 flex w-full bg-white lg:sticky">
         <div className="w-full lg:flex">
           <NameComponent />
-          <div className="grid grid-cols-2 p-4 w-full items-center lg:py-3 lg:px-0 lg:flex lg:h-full">
+          <div className="grid gap-4 grid-cols-2 p-4 w-full items-center lg:gap-0 lg:py-3 lg:px-0 lg:flex lg:h-full">
             <ArmorClassComponent />
             <InitiativeComponent />
             <MovementComponent />
             <ProficiencyBonusComponent />
 
             <div
-              className="flex mt-4 lg:mt-0 lg:ml-auto"
+              className="flex lg:mt-0 lg:ml-auto"
               style={{ gridColumn: '2 span' }}
             >
               <Button

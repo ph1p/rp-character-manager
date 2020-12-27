@@ -26,7 +26,7 @@ export const AttributesComponent = observer(() => {
             </div>
             {store.editMode ? (
               <Input
-                className="text-xl"
+                className="mb-2"
                 type="text"
                 placeholder="Score..."
                 defaultValue={attribute.score}
@@ -37,7 +37,7 @@ export const AttributesComponent = observer(() => {
             )}
             {store.editMode && (
               <Input
-                className="text-xl"
+                className="mb-2"
                 type="text"
                 label="Extra-Score"
                 defaultValue={attribute.extraScore}

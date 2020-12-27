@@ -17,41 +17,47 @@ export const SkillsComponent = observer(() => {
         {store.skills.values
           .slice()
           .sort((skill) => ~Number(skill.practiced) + 1)
-          .map((skill) => (
-            <div key={skill.name}>
-              <div className="flex items-center mb-2 last:mb-0 w-full">
-                <div
-                  className={`mr-2 px-2 text-white bg-${
-                    skill.practiced ? 'green' : 'gray'
-                  }-500 rounded-full`}
-                >
-                  {skill.score}
+          .map((skill) => {
+            const name = `${t(`skill.${skill.name}`)} (${t(`attribute.${skill.attribute}`).substr(0, 3)})`
+            return (
+              <div key={skill.name} className="w-full">
+                <div className="flex items-center w-full">
+                  <div
+                    className={`mr-2 px-2 text-white bg-${
+                      skill.practiced ? 'green' : 'gray'
+                    }-500 rounded-full`}
+                  >
+                    {skill.score}
+                  </div>
+                  <div>
+                    {store.editMode ? (
+                      <Input
+                        label={name}
+                        defaultValue={skill.bonusValue}
+                        onChange={(e) =>
+                          skill.setBonusValue(
+                            parseInt(e.currentTarget.value, 10)
+                          )
+                        }
+                      />
+                    ) : (
+                      <>
+                        {name}
+                      </>
+                    )}
+                  </div>
+                  {store.editMode && (
+                    <Checkbox
+                      className="ml-auto"
+                      label="ist geübt"
+                      checked={skill.practiced}
+                      onChange={() => skill.togglePracticed()}
+                    />
+                  )}
                 </div>
-                <div>
-                  {t(`skill.${skill.name}`)} (
-                  {t(`attribute.${skill.attribute}`).substr(0, 3)})
-                </div>
-                {store.editMode && (
-                  <Checkbox
-                    className="ml-auto"
-                    label="ist geübt"
-                    checked={skill.practiced}
-                    onChange={() => skill.togglePracticed()}
-                  />
-                )}
               </div>
-
-              {store.editMode && (
-                <Input
-                  label="Bonus-Punkte"
-                  defaultValue={skill.bonusValue}
-                  onChange={(e) =>
-                    skill.setBonusValue(parseInt(e.currentTarget.value, 10))
-                  }
-                />
-              )}
-            </div>
-          ))}
+            );
+          })}
       </div>
     </ContentBox>
   );
