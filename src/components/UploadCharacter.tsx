@@ -1,16 +1,22 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import Ajv, { ErrorObject } from 'ajv';
 
 import { CharacterStore } from '../store/character';
 import { useStore } from '../store';
+import schema from '../data/json-schema';
+import { Notification } from '../components/Notification';
+
+const validate = new Ajv().compile(schema);
 
 export const UploadComponent = () => {
   const store = useStore();
 
   const [data, setData] = useState<CharacterStore>();
+  const [errors, setErrors] = useState<ErrorObject[] | null>();
   const [created, setCreated] = useState<boolean>(false);
 
   useEffect(() => {
-    if (data) {
+    if (data && validate(data)) {
       const char = store.createCharacter(data.name);
 
       char.setArmorClass(data.armorClass);
@@ -31,6 +37,8 @@ export const UploadComponent = () => {
 
       setCreated(true);
       setData(undefined);
+    } else {
+      setErrors(validate.errors);
     }
   }, [data, store]);
 
@@ -58,17 +66,22 @@ export const UploadComponent = () => {
   return (
     <>
       {created && (
-        <div className="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500 text-sm">
-          <span className="inline-block align-middle mr-8">
-            Successfully created
-          </span>
-          <button
-            className="absolute bg-transparent text-xl font-semibold leading-none right-0 top-0 mt-4 mr-5 outline-none focus:outline-none"
-            onClick={() => setCreated(false)}
-          >
-            <span>×</span>
-          </button>
-        </div>
+        <Notification
+          color="green"
+          onClose={() => setCreated(false)}
+        >
+          Successfully created
+        </Notification>
+      )}
+      {errors && (
+        <Notification color="red" onClose={() => setErrors(null)}>
+          {errors.map((e) => (
+            <div key={e.dataPath}>
+              {e.dataPath} : {e.message}
+              <br />
+            </div>
+          ))}
+        </Notification>
       )}
 
       <div className="overflow-hidden relative w-full">

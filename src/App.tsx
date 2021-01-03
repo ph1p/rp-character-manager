@@ -5,7 +5,6 @@ import { observer } from 'mobx-react-lite';
 import { Character } from './ui/Character';
 import { useStore } from './store';
 import { UploadComponent } from './components/UploadCharacter';
-import { Select } from './components/Select';
 import { Modal } from './components/Modal';
 import { Input } from './components/Input';
 import { Button } from './components/Button';
@@ -30,11 +29,17 @@ export default observer(() => {
         <>
           <UploadComponent />
 
-          <div className="mt-7 bg-gray-100 p-3">
+          <div className="mt-7">
             {store.characters.map((character) => (
-              <div className="flex py-2 px-3 cursor-pointer" key={character.id}>
-                <div onClick={() => store.selectCharacter(character.id)}>
-                  {character.name}
+              <div
+                className="flex py-2 px-3 cursor-pointer justify-between bg-gray-100 hover:bg-gray-200 mb-2 rounded"
+                key={character.id}
+                onClick={() => store.selectCharacter(character.id)}
+              >
+                <div>{character.name}</div>
+                <div className="text-xs text-gray-400 self-center">
+                  HP: {character.hitpoints}/{character.maxHitpoints} | Lvl:{' '}
+                  {character.level}
                 </div>
               </div>
             ))}

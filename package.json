@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^7.0.3",
     "date-fns": "^2.16.1",
     "i18next": "^19.8.4",
     "mobx": "^6.0.4",
