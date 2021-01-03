@@ -1,11 +1,15 @@
 import { persist } from "mobx-persist";
 import { makeAutoObservable } from "mobx";
 
+import i18n from "../i18n";
+
 import { CharacterStore } from "./character";
 
 export class RootStore {
   @persist('list', CharacterStore)
   characters: CharacterStore[] = [];
+
+  @persist language: string = 'de';
 
   constructor() {
     makeAutoObservable(this);
@@ -25,5 +29,10 @@ export class RootStore {
 
   characterById(id: string) {
     return this.characters.find(c => c.id === id);
+  }
+
+  setLanguage(lang: string) {
+    this.language = lang;
+    i18n.changeLanguage(lang);
   }
 }
