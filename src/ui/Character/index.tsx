@@ -1,11 +1,10 @@
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
 
 import { CharacterStore } from '../../store/character';
-import { useCharacterStore, useStore } from '../../store';
+import { useCharacterStore } from '../../store';
 import { Input } from '../../components/Input';
 import { ContentBox } from '../../components/ContentBox';
 import { Button } from '../../components/Button';
@@ -42,36 +41,6 @@ export const NameComponent = observer(() => {
   );
 });
 
-const RemoveCharacter = observer(() => {
-  const character = useCharacterStore();
-  const { t } = useTranslation();
-  const history = useHistory();
-
-  const store = useStore();
-
-  return (
-    <>
-      {character.editMode && (
-        <ContentBox className="mt-5">
-          <Button
-            type="submit"
-            onClick={() => {
-              if (window.confirm(t('character-delete-confirm'))) {
-                store.removeCharacter(character.id);
-                history.push('/');
-              }
-            }}
-            full
-            color="red"
-          >
-            Charakter löschen
-          </Button>
-        </ContentBox>
-      )}
-    </>
-  );
-});
-
 const DownloadComponent = () => {
   const character = useCharacterStore();
   const { t } = useTranslation();
@@ -88,7 +57,7 @@ const DownloadComponent = () => {
   };
 
   return (
-    <ContentBox className="mt-5">
+    <ContentBox className="mt-4">
       <Button full onClick={() => downloadCharacter(character)}>
         {t('download-character')}
       </Button>
@@ -109,11 +78,11 @@ export const Character = observer(() => {
 
       <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-3">
         <>
-          <div className="flex flex-col gap-4">
-            <ContentBox>
+          <div className="flex flex-col">
+            <ContentBox className="mb-4">
               <NameComponent />
             </ContentBox>
-            <ContentBox>
+            <ContentBox className="mb-4">
               <HitpointsComponent />
             </ContentBox>
             <ContentBox className="grid grid-cols-2 gap-4">
@@ -126,7 +95,6 @@ export const Character = observer(() => {
           </div>
           <div>
             <InventoryComponent />
-            <RemoveCharacter />
 
             <DownloadComponent />
           </div>

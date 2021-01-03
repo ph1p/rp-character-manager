@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite';
 import { TInventoryItem, useCharacterStore } from '../../../store';
 import { Input } from '../../../components/Input';
 import { PencilIcon } from '../../../components/icons/Pencil';
+import { ContentBox } from '../../../components/ContentBox';
 import { Button } from '../../../components/Button';
 
 const InventoryItem: FunctionComponent<{
@@ -127,9 +128,9 @@ export const InventoryComponent = observer(() => {
 
   return (
     <div>
-      <div className="bg-white p-5 rounded-md">
+      <ContentBox className="mb-4">
         <h2 className="text-xl">Inventar</h2>
-        <div style={{ maxHeight: 300 }} className="mt-3 overflow-y-auto">
+        <div style={{ maxHeight: 300 }} className="mt-3 mb-4 overflow-y-auto">
           {character.inventory.items.map((item) => (
             <InventoryItem
               key={item.id}
@@ -138,8 +139,7 @@ export const InventoryComponent = observer(() => {
             />
           ))}
         </div>
-      </div>
-      <div className="bg-white p-5 rounded-md mt-5">
+
         <form className="w-full max-w-lg" onSubmit={addItem}>
           <div className="flex">
             <Input
@@ -169,7 +169,7 @@ export const InventoryComponent = observer(() => {
             {t('inventory.add-item')}
           </button>
         </form>
-      </div>
+      </ContentBox>
     </div>
   );
 });

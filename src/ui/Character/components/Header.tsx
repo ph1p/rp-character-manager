@@ -112,6 +112,7 @@ export const Header = observer(() => {
       >
         <NotesComponent />
       </Modal>
+
       <div className="top-0 flex w-full bg-white lg:shadow-sm lg:sticky">
         <div className="w-full lg:flex">
           <Link
