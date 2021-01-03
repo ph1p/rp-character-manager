@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { useCharacterStore } from '../../../store';
