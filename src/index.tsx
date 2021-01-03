@@ -3,7 +3,7 @@ import React from 'react';
 import { create } from 'mobx-persist';
 
 import { WithMobX, rootStore } from './store';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 // import reportWebVitals from './reportWebVitals';
 import App from './App';
 
@@ -23,7 +23,7 @@ Promise.all([hydrate('__rpcm__', rootStore)]).then(() => {
   );
 });
 
-serviceWorker.register();
+serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
