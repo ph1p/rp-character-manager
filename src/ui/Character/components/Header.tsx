@@ -118,7 +118,11 @@ export const Header = observer(() => {
             to="/"
             className="self-center w-full p-5 text-xl border-b lg:border-b-0 lg:w-auto lg:border-r lg:px-5 lg:py-3 lg:mr-5 hover:text-green-500 flex"
           >
-            <Arrowleft width="18" className="inline-block mr-2" />
+            <Arrowleft
+              width="18"
+              height="18"
+              className="inline-block mr-2 self-center"
+            />
             Home
           </Link>
 
