@@ -82,7 +82,8 @@ const NoteItem: FunctionComponent<{
             small
             color="red"
             onClick={() =>
-              window.confirm('Wirklich?') && props.remove(props.note.id)
+              window.confirm(t('notes.delete-confirm')) &&
+              props.remove(props.note.id)
             }
           >
             {t('remove')}
@@ -94,13 +95,13 @@ const NoteItem: FunctionComponent<{
 });
 
 export const NotesComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
   const [text, setText] = useState<string>('');
 
   const addNote = (e: SyntheticEvent) => {
     e.preventDefault();
-    store.notes.create(text);
+    character.notes.create(text);
     setText('');
   };
 
@@ -111,14 +112,14 @@ export const NotesComponent = observer(() => {
         style={{ maxHeight: 300 }}
         className="overflow-y-auto mb-5 border-b-2 pb-5 border-gray-100"
       >
-        {store.notes.values
+        {character.notes.values
           .slice()
           .sort((b, a) => a.date - b.date)
           .map((note) => (
             <NoteItem
               key={note.id}
               note={note}
-              remove={(id) => store.notes.remove(id)}
+              remove={(id) => character.notes.remove(id)}
             />
           ))}
       </div>

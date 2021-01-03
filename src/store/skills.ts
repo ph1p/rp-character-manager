@@ -1,6 +1,3 @@
-
-
-
 import { persist } from 'mobx-persist';
 import { makeAutoObservable } from 'mobx';
 
@@ -50,10 +47,11 @@ export class CharacterSkill {
     this.practiced = !this.practiced;
   }
 
-  get score() {
+  score(id: string) {
+    const char = rootStore.characterById(id);
     // bonus +  attribute modifier + proficiency bonus
-    if (rootStore.character) {
-      return this.bonusValue + rootStore.character.attributes.getModifier(this.attribute) + (this.practiced ? rootStore.character.proficiencyBonus : 0);
+    if (char) {
+      return this.bonusValue + char.attributes.getModifier(this.attribute) + (this.practiced ? char.proficiencyBonus : 0);
     }
     return 0;
   }

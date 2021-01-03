@@ -50,11 +50,13 @@
     "perception": "Wahrnehmung"
   },
   "inventory": {
-    "add-item": "Gegenstand hinzufügen"
+    "add-item": "Gegenstand hinzufügen",
+    "delete-confirm": "Soll der Gegenstand wirklich gelöscht werden?"
   },
   "notes": {
     "singular": "Notiz",
     "plural": "Notizen",
-    "add-note": "Notiz hinzufügen"
+    "add-note": "Notiz hinzufügen",
+    "delete-confirm": "Soll die Notiz wirklich gelöscht werden?"
   }
 }

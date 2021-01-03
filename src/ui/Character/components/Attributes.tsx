@@ -6,15 +6,16 @@ import { useCharacterStore } from '../../../store';
 import { Input } from '../../../components/Input';
 import { Checkbox } from '../../../components/Checkbox';
 
+
 export const AttributesComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
 
   return (
     <div>
       <h3 className="text-2xl mb-3">Attribute</h3>
       <div className="grid gap-2">
-        {store.attributes.values.map((attribute) => (
+        {character.attributes.values.map((attribute) => (
           <div
             className="text-center border-gray-100 border bg-gray-50 rounded p-2"
             key={attribute.name}
@@ -25,7 +26,7 @@ export const AttributesComponent = observer(() => {
             <div className="text-2xl font-bold px-2 my-2 bg-green-500 text-white inline-block rounded">
               {addSignToNumber(attribute.modifier)}
             </div>
-            {store.editMode ? (
+            {character.editMode ? (
               <Input
                 className="mb-2"
                 type="text"
@@ -36,7 +37,7 @@ export const AttributesComponent = observer(() => {
             ) : (
               <div>{attribute.score}</div>
             )}
-            {store.editMode && (
+            {character.editMode && (
               <Input
                 className="mb-2"
                 type="text"
@@ -45,7 +46,7 @@ export const AttributesComponent = observer(() => {
                 onInput={(e) => attribute.setExtraScore(e.currentTarget.value)}
               />
             )}
-            {store.editMode && (
+            {character.editMode && (
               <Checkbox
                 label={t('saving-throw')}
                 checked={attribute.isSavingThrow}

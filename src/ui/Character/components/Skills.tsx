@@ -8,14 +8,14 @@ import { ContentBox } from '../../../components/ContentBox';
 import { Checkbox } from '../../../components/Checkbox';
 
 export const SkillsComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
 
   return (
     <ContentBox>
       <h3 className="text-2xl mb-3">{t('skills')}</h3>
       <div className="grid gap-2">
-        {store.skills.values
+        {character.skills.values
           .slice()
           .sort((skill) => ~Number(skill.practiced) + 1)
           .map((skill) => {
@@ -30,10 +30,10 @@ export const SkillsComponent = observer(() => {
                       skill.practiced ? 'green' : 'gray'
                     }-500 rounded-full`}
                   >
-                    {addSignToNumber(skill.score)}
+                    {addSignToNumber(skill.score(character.id))}
                   </div>
                   <div>
-                    {store.editMode ? (
+                    {character.editMode ? (
                       <Input
                         label={name}
                         defaultValue={skill.bonusValue}
@@ -47,7 +47,7 @@ export const SkillsComponent = observer(() => {
                       <>{name}</>
                     )}
                   </div>
-                  {store.editMode && (
+                  {character.editMode && (
                     <Checkbox
                       className="ml-auto"
                       label={t('practiced')}

@@ -10,37 +10,23 @@ import { CharacterAttributesStore } from './attributes';
 
 
 export class CharacterStore {
-  @persist
-  id = uuidv4();
+  @persist id = uuidv4();
 
   editMode = false;
 
-  @persist
-  name = '';
-
-  @persist
-  level: number = 1;
+  @persist name = '';
+  @persist level: number = 1;
 
   // @persist('list', CustomCharacterValue)
   customValues: CustomCharacterValue[] = [];
 
   // hitpoints
-  maxHitpoints = 20;
-
-  @persist
-  hitpoints = this.maxHitpoints;
-
-  @persist
-  armorClass: number = 0;
-
-  @persist
-  initiative: number = 2;
-
-  @persist
-  movement: number = 0;
-
-  @persist
-  proficiencyBonus: number = 2;
+  @persist maxHitpoints = 20;
+  @persist hitpoints = this.maxHitpoints;
+  @persist armorClass: number = 0;
+  @persist initiative: number = 2;
+  @persist movement: number = 0;
+  @persist proficiencyBonus: number = 2;
 
   @persist('object', InventoryStore)
   inventory = new InventoryStore();

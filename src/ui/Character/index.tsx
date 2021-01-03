@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
@@ -20,8 +20,8 @@ import { HitpointsComponent } from './components/Hitpoints';
 import { AttributesComponent } from './components/Attributes';
 
 export const NameComponent = observer(() => {
-  const { t } = useTranslation();
   const character = useCharacterStore();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -45,24 +45,24 @@ export const NameComponent = observer(() => {
 });
 
 const ProficiencyBonusComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
 
   return (
     <>
-      {store.editMode ? (
+      {character.editMode ? (
         <Input
           className="mr-4 w-full lg:w-44"
           type="text"
           label={t('proficiency-bonus')}
-          defaultValue={store.proficiencyBonus}
+          defaultValue={character.proficiencyBonus}
           onInput={(e) =>
-            store.setProficiencyBonus(parseInt(e.currentTarget.value, 10))
+            character.setProficiencyBonus(parseInt(e.currentTarget.value, 10))
           }
         />
       ) : (
         <CharacterValue
-          value={store.proficiencyBonus}
+          value={character.proficiencyBonus}
           description={t('proficiency-bonus')}
         />
       )}
@@ -80,24 +80,24 @@ const CharacterValue = (props: any) => (
 );
 
 const InitiativeComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
 
   return (
     <>
-      {store.editMode ? (
+      {character.editMode ? (
         <Input
           className="mr-4 w-full lg:w-44 lg:mb-0"
           type="text"
           label={t('initiative')}
-          defaultValue={store.initiative}
+          defaultValue={character.initiative}
           onInput={(e) =>
-            store.setInitiative(parseInt(e.currentTarget.value, 10))
+            character.setInitiative(parseInt(e.currentTarget.value, 10))
           }
         />
       ) : (
         <CharacterValue
-          value={store.initiative}
+          value={character.initiative}
           description={t('initiative')}
         />
       )}
@@ -106,24 +106,24 @@ const InitiativeComponent = observer(() => {
 });
 
 const ArmorClassComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
 
   return (
     <>
-      {store.editMode ? (
+      {character.editMode ? (
         <Input
           className="mr-4 w-full lg:w-44 lg:mb-0"
           type="text"
           label={t('armor-class')}
-          defaultValue={store.armorClass}
+          defaultValue={character.armorClass}
           onInput={(e) =>
-            store.setArmorClass(parseInt(e.currentTarget.value, 10))
+            character.setArmorClass(parseInt(e.currentTarget.value, 10))
           }
         />
       ) : (
         <CharacterValue
-          value={store.armorClass}
+          value={character.armorClass}
           description={t('armor-class')}
         />
       )}
@@ -132,33 +132,37 @@ const ArmorClassComponent = observer(() => {
 });
 
 const MovementComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
 
   return (
     <>
-      {store.editMode ? (
+      {character.editMode ? (
         <Input
           className="mr-4 w-full lg:w-44"
           type="text"
           label={t('movement')}
-          defaultValue={store.movement}
+          defaultValue={character.movement}
           onInput={(e) =>
-            store.setMovement(parseInt(e.currentTarget.value, 10))
+            character.setMovement(parseInt(e.currentTarget.value, 10))
           }
         />
       ) : (
-        <CharacterValue value={store.movement} description={t('movement')} />
+        <CharacterValue
+          value={character.movement}
+          description={t('movement')}
+        />
       )}
     </>
   );
 });
 
 const RemoveCharacter = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
+  const history = useHistory();
 
   const store = useStore();
-  const character = useCharacterStore();
 
   return (
     <>
@@ -168,8 +172,8 @@ const RemoveCharacter = observer(() => {
             type="submit"
             onClick={() => {
               if (window.confirm(t('character-delete-confirm'))) {
-                store.removeCharacter(store.selectedID);
-                store.selectCharacter('');
+                store.removeCharacter(character.id);
+                history.push('/');
               }
             }}
             full
@@ -184,8 +188,8 @@ const RemoveCharacter = observer(() => {
 });
 
 const DownloadComponent = () => {
-  const { t } = useTranslation();
   const character = useCharacterStore();
+  const { t } = useTranslation();
 
   const downloadCharacter = (character: CharacterStore) => {
     const data = `data:${`text/json;charset=utf-8,${encodeURIComponent(
@@ -211,6 +215,10 @@ export const Character = observer(() => {
   const { t } = useTranslation();
   const character = useCharacterStore();
   const [openNotes, setNotesOpen] = useState(false);
+
+  if (!character.name) {
+    return null;
+  }
 
   return (
     <>

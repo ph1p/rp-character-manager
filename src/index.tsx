@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { create } from 'mobx-persist';
 
-import { WithMobX, rootStore } from './store';
+import { rootStore } from './store';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 // import reportWebVitals from './reportWebVitals';
 import App from './App';
@@ -10,14 +10,16 @@ import App from './App';
 import './globals.css';
 import './i18n';
 
-const AppWithStore = WithMobX(App);
-
+// const AppWithStore = WithMobX(App);
 const hydrate = create();
 
-Promise.all([hydrate('__rpcm__', rootStore)]).then(() => {
+Promise.all([
+  // @ts-ignore
+  hydrate('__rpcm__', rootStore),
+]).then(() => {
   ReactDOM.render(
     <React.StrictMode>
-      <AppWithStore />
+      <App />
     </React.StrictMode>,
     document.getElementById('root')
   );

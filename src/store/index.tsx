@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { createContext, useContext } from 'react';
 
 import { RootStore } from './root';
@@ -26,27 +26,29 @@ export const useStore = (): TRootStore => {
 };
 
 export const useCharacterStore = (): TCharacterStore => {
-  const store = useContext(RootStoreContext);
+  const character = useContext(RootStoreContext) as RootStore & {
+    currentCharacter: TCharacterStore;
+  };
   const history = useHistory();
 
-  if (!store) {
-    throw new Error('useStore must be used within a StoreProvider.');
-  }
-  const character = store.character;
-
-  if (!character) {
-    store.selectCharacter('');
+  if (!character?.currentCharacter) {
     history.push('/');
-    throw new Error('Character not found.');
+    return {} as TCharacterStore;
   }
 
-  return character;
+  return character.currentCharacter;
 };
 
-export const WithMobX = (WrappedComponent: any) => {
-  return (props: any) => (
-    <RootStoreContext.Provider value={rootStore}>
-      <WrappedComponent {...props} />
+export const StoreProvider = (props: any) => {
+  const { id } = useParams<{ id: string }>();
+
+  return (
+    <RootStoreContext.Provider
+      value={Object.assign(rootStore, {
+        currentCharacter: rootStore.characterById(id) || null,
+      })}
+    >
+      {props.children}
     </RootStoreContext.Provider>
   );
 };

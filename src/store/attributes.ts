@@ -1,11 +1,11 @@
-
-
 import { persist } from 'mobx-persist';
 import { makeAutoObservable } from 'mobx';
 
 import defaultAttributes from '../data/attributes.json';
 
 import { rootStore } from '.';
+
+// import { rootStore } from '.';
 
 export type Attributes = 'strength' |
   'dexterity' |
@@ -30,9 +30,10 @@ export class CharacterAttribute {
     return Math.floor(((this.score + this.extraScore) - 10) / 2) || 0;
   }
 
-  get savingThrow() {
-    if (this.isSavingThrow && rootStore.character) {
-      return rootStore.character.proficiencyBonus + this.modifier;
+  savingThrow(id: string) {
+    const char = rootStore.characterById(id);
+    if (this.isSavingThrow && char) {
+      return char.proficiencyBonus + this.modifier;
     }
     return this.modifier;
   }

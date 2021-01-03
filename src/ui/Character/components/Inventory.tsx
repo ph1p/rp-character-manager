@@ -91,7 +91,9 @@ const InventoryItem: FunctionComponent<{
             className="ml-auto"
             small
             color="red"
-            onClick={() => window.confirm('Wirklich?') && remove(item.id)}
+            onClick={() =>
+              window.confirm(t('inventory.delete-confirm')) && remove(item.id)
+            }
           >
             {t('remove')}
           </Button>
@@ -102,8 +104,8 @@ const InventoryItem: FunctionComponent<{
 });
 
 export const InventoryComponent = observer(() => {
+  const character = useCharacterStore();
   const { t } = useTranslation();
-  const store = useCharacterStore();
   const [formItem, setFormItem] = useState<any>({
     name: '',
     description: '',
@@ -112,7 +114,7 @@ export const InventoryComponent = observer(() => {
 
   const addItem = (e: SyntheticEvent) => {
     e.preventDefault();
-    store.inventory.createItem(formItem);
+    character.inventory.createItem(formItem);
     setFormItem({
       name: '',
       description: '',
@@ -128,11 +130,11 @@ export const InventoryComponent = observer(() => {
       <div className="bg-white p-5 rounded-md">
         <h2 className="text-xl">Inventar</h2>
         <div style={{ maxHeight: 300 }} className="mt-3 overflow-y-auto">
-          {store.inventory.items.map((item) => (
+          {character.inventory.items.map((item) => (
             <InventoryItem
               key={item.id}
               item={item}
-              remove={(id) => store.inventory.remove(id)}
+              remove={(id) => character.inventory.remove(id)}
             />
           ))}
         </div>

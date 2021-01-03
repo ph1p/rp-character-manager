@@ -28,7 +28,6 @@ export const Dashboard = observer(() => {
               <Link
                 to={`/character/${character.id}`}
                 className="flex w-full items-center py-2 px-3 cursor-pointer justify-between bg-gray-100 hover:bg-gray-200 rounded-l"
-                onClick={() => store.selectCharacter(character.id)}
               >
                 <div>{character.name}</div>
                 <div className="text-xs text-gray-400 self-center">
@@ -57,7 +56,6 @@ export const Dashboard = observer(() => {
             e.preventDefault();
             if (name) {
               const char = store.createCharacter(name);
-              store.selectCharacter(char.id);
               setName('');
               history.push(`/character/${char.id}`);
             }

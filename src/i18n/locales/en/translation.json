@@ -50,11 +50,13 @@
     "perception": "Perception"
   },
   "inventory": {
-    "add-item": "Add Item"
+    "add-item": "Add Item",
+    "delete-confirm": "Should the item really be deleted?"
   },
   "notes": {
     "singular": "Note",
     "plural": "Notes",
-    "add-note": "Add Note"
+    "add-note": "Add Note",
+    "delete-confirm": "Should the note really be deleted?"
   }
 }

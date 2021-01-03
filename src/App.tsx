@@ -4,16 +4,21 @@ import { observer } from 'mobx-react-lite';
 
 import { Dashboard } from './ui/Dashboard';
 import { Character } from './ui/Character';
+import { StoreProvider } from './store';
 
 export default observer(() => {
   return (
     <Router>
       <Switch>
         <Route path="/character/:id">
-          <Character />
+          <StoreProvider>
+            <Character />
+          </StoreProvider>
         </Route>
         <Route path="/">
-          <Dashboard />
+          <StoreProvider>
+            <Dashboard />
+          </StoreProvider>
         </Route>
       </Switch>
     </Router>
