@@ -15,6 +15,12 @@
   "download-character": "Charakter herunterladen",
   "practiced": "Geübt",
   "skills": "Fertigkeiten",
+  "create-character": "Charakter erstellen",
+  "character-delete-confirm": "Soll der Charakter wirklich gelöscht werden?",
+  "upload": {
+    "file": "Charakter Datei hochladen",
+    "success": "Charakter erfolgreich hochgeladen"
+  },
   "attribute": {
     "strength": "Stärke",
     "dexterity": "Geschicklichkeit",

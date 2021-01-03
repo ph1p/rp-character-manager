@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
@@ -7,6 +8,7 @@ import { CharacterStore } from '../../store/character';
 import { useCharacterStore, useStore } from '../../store';
 import { Modal } from '../../components/Modal';
 import { Input } from '../../components/Input';
+import { Arrowleft } from '../../components/icons/ArrowLeft';
 import { ContentBox } from '../../components/ContentBox';
 import { Button } from '../../components/Button';
 
@@ -17,34 +19,25 @@ import { InventoryComponent } from './components/Inventory';
 import { HitpointsComponent } from './components/Hitpoints';
 import { AttributesComponent } from './components/Attributes';
 
-const NameComponent = observer(() => {
-  const store = useStore();
+export const NameComponent = observer(() => {
+  const { t } = useTranslation();
   const character = useCharacterStore();
 
   return (
     <>
       {character.editMode ? (
         <Input
-          className="mr-4 w-auto ml-4 mt-4 lg:mt-0 lg:py-3 lg:px-0 lg:w-44"
           type="text"
           label="Name"
           defaultValue={character.name}
           onInput={(e) => character.setName(e.currentTarget.value)}
         />
       ) : (
-        <div className="bg-green-600 text-white px-5 lg:mr-4 lg:ml-0">
-          <select
-            className="py-6 text-xl appearance-none cursor-pointer bg-transparent w-full lg:w-auto"
-            value={store.selectedID}
-            onChange={(e) => store.selectCharacter(e.currentTarget.value)}
-          >
-            <option value="">----</option>
-            {store.characters.map((character) => (
-              <option value={character.id} key={character.id}>
-                {character.name}
-              </option>
-            ))}
-          </select>
+        <div>
+          <div className="uppercase text-gray-400">{t('name')}</div>
+          <div className="text-3xl appearance-none bg-transparent w-full lg:w-auto">
+            {character.name}
+          </div>
         </div>
       )}
     </>
@@ -162,6 +155,8 @@ const MovementComponent = observer(() => {
 });
 
 const RemoveCharacter = observer(() => {
+  const { t } = useTranslation();
+
   const store = useStore();
   const character = useCharacterStore();
 
@@ -172,7 +167,7 @@ const RemoveCharacter = observer(() => {
           <Button
             type="submit"
             onClick={() => {
-              if (window.confirm('Wirklich?')) {
+              if (window.confirm(t('character-delete-confirm'))) {
                 store.removeCharacter(store.selectedID);
                 store.selectCharacter('');
               }
@@ -229,7 +224,14 @@ export const Character = observer(() => {
 
       <div className="top-0 flex w-full bg-white lg:shadow-sm lg:sticky">
         <div className="w-full lg:flex">
-          <NameComponent />
+          <Link
+            to="/"
+            className="self-center w-full p-5 text-xl border-b lg:border-b-0 lg:w-auto lg:border-r lg:px-5 lg:py-3 lg:mr-5 hover:text-green-500 flex"
+          >
+            <Arrowleft width="18" className="inline-block mr-2" />
+            Home
+          </Link>
+
           <div className="grid gap-4 grid-cols-2 p-4 w-full items-center lg:gap-0 lg:py-3 lg:px-0 lg:flex lg:h-full">
             <ArmorClassComponent />
             <InitiativeComponent />
@@ -262,6 +264,9 @@ export const Character = observer(() => {
       <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-3">
         <>
           <div className="flex flex-col gap-4">
+            <ContentBox>
+              <NameComponent />
+            </ContentBox>
             <ContentBox>
               <HitpointsComponent />
             </ContentBox>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Ajv, { ErrorObject } from 'ajv';
 
@@ -10,6 +11,8 @@ const validate = new Ajv().compile(schema);
 
 export const UploadComponent = () => {
   const store = useStore();
+
+  const { t } = useTranslation();
 
   const [data, setData] = useState<CharacterStore>();
   const [errors, setErrors] = useState<ErrorObject[] | null>();
@@ -66,11 +69,8 @@ export const UploadComponent = () => {
   return (
     <>
       {created && (
-        <Notification
-          color="green"
-          onClose={() => setCreated(false)}
-        >
-          Successfully created
+        <Notification color="green" onClose={() => setCreated(false)}>
+          {t('upload.success')}
         </Notification>
       )}
       {errors && (
@@ -96,7 +96,7 @@ export const UploadComponent = () => {
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
           </svg>
-          <span className="ml-2">Upload character file</span>
+          <span className="ml-2">{t('upload.file')}</span>
         </button>
         <input
           className="cursor-pointer absolute block opacity-0 top-0 bottom-0 w-auto"

@@ -15,6 +15,12 @@
   "download-character": "Download Character",
   "practiced": "Practiced",
   "skills": "Skills",
+  "create-character": "Create Character",
+  "character-delete-confirm": "Should the character really be deleted?",
+  "upload": {
+    "file": "Upload Character-File",
+    "success": "Character successfully uploaded"
+  },
   "attribute": {
     "strength": "Strength",
     "dexterity": "Dexterity",

@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import { createContext, useContext } from 'react';
 
 import { RootStore } from './root';
@@ -26,6 +27,7 @@ export const useStore = (): TRootStore => {
 
 export const useCharacterStore = (): TCharacterStore => {
   const store = useContext(RootStoreContext);
+  const history = useHistory();
 
   if (!store) {
     throw new Error('useStore must be used within a StoreProvider.');
@@ -34,6 +36,7 @@ export const useCharacterStore = (): TCharacterStore => {
 
   if (!character) {
     store.selectCharacter('');
+    history.push('/');
     throw new Error('Character not found.');
   }
 
