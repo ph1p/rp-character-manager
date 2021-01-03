@@ -51,7 +51,8 @@
   },
   "inventory": {
     "add-item": "Gegenstand hinzufügen",
-    "delete-confirm": "Soll der Gegenstand wirklich gelöscht werden?"
+    "delete-confirm": "Soll der Gegenstand wirklich gelöscht werden?",
+    "quantity": "Anzahl"
   },
   "notes": {
     "singular": "Notiz",

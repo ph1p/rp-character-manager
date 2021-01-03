@@ -152,7 +152,7 @@ export const InventoryComponent = observer(() => {
             />
 
             <Input
-              label="Anzahl"
+              label={t('inventory.quantity')}
               type="number"
               name="quantity"
               className="flex-none w-14"

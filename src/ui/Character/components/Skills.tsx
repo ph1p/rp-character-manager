@@ -32,24 +32,22 @@ export const SkillsComponent = observer(() => {
                   >
                     {addSignToNumber(skill.score(character.id))}
                   </div>
-                  <div>
-                    {character.editMode ? (
-                      <Input
-                        label={name}
-                        defaultValue={skill.bonusValue}
-                        onChange={(e) =>
-                          skill.setBonusValue(
-                            parseInt(e.currentTarget.value, 10)
-                          )
-                        }
-                      />
-                    ) : (
-                      <>{name}</>
-                    )}
-                  </div>
+
+                  {character.editMode ? (
+                    <Input
+                      label={name}
+                      defaultValue={skill.bonusValue}
+                      onChange={(e) =>
+                        skill.setBonusValue(parseInt(e.currentTarget.value, 10))
+                      }
+                    />
+                  ) : (
+                    <>{name}</>
+                  )}
+
                   {character.editMode && (
                     <Checkbox
-                      className="ml-auto"
+                      className="ml-2 mt-4"
                       label={t('practiced')}
                       checked={skill.practiced}
                       onChange={() => skill.togglePracticed()}

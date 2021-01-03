@@ -51,7 +51,8 @@
   },
   "inventory": {
     "add-item": "Add Item",
-    "delete-confirm": "Should the item really be deleted?"
+    "delete-confirm": "Should the item really be deleted?",
+    "quantity": "Quantity"
   },
   "notes": {
     "singular": "Note",
