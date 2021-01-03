@@ -10,13 +10,9 @@ import App from './App';
 import './globals.css';
 import './i18n';
 
-// const AppWithStore = WithMobX(App);
 const hydrate = create();
 
-Promise.all([
-  // @ts-ignore
-  hydrate('__rpcm__', rootStore),
-]).then(() => {
+Promise.all([hydrate('__rpcm__', rootStore)]).then(() => {
   ReactDOM.render(
     <React.StrictMode>
       <App />

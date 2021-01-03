@@ -83,9 +83,9 @@ export const UploadComponent = () => {
           ))}
         </Notification>
       )}
-
       <div className="overflow-hidden relative w-full">
         <button className="bg-green-500 rounded hover:bg-green-400 text-white py-2 px-4 w-full inline-flex items-center text-sm focus:outline-none">
+
           <svg
             fill="#FFF"
             height="18"
