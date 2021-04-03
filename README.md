@@ -7,7 +7,5 @@ Always automatically deployed: [![](https://img.shields.io/badge/vercel-demo-bla
 Work in progress (:
 
 ```bash
-yarn set version berry
 yarn install
-yarn dlx @yarnpkg/pnpify --sdk vscode
 ```
