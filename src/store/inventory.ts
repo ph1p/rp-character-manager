@@ -41,10 +41,24 @@ export class InventoryItem {
   }
 }
 
+export type Coins =
+  | 'platinum-coin'
+  | 'gold-coin'
+  | 'electric-coin'
+  | 'silver-coin'
+  | 'copper-coin';
 export class InventoryStore {
   items: InventoryItem[] = [];
 
   unit: string = 'kg';
+
+  coins: Record<Coins, number> = {
+    'platinum-coin': 0,
+    'gold-coin': 0,
+    'electric-coin': 0,
+    'silver-coin': 0,
+    'copper-coin': 0,
+  };
 
   @ignore
   store: CharacterStore;
@@ -54,6 +68,10 @@ export class InventoryStore {
     this.store = store;
 
     console.log(this);
+  }
+
+  setCoin(coin: Coins, value: number) {
+    this.coins[coin] = value;
   }
 
   remove(id: string) {

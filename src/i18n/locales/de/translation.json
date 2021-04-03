@@ -54,7 +54,18 @@
     "add-item": "Gegenstand hinzufügen",
     "delete-confirm": "Soll der Gegenstand wirklich gelöscht werden?",
     "quantity": "Anzahl",
-    "weight": "Gewicht"
+    "weight": "Gewicht",
+    "self": "Inventar",
+    "is-loaded": "Ist belastet",
+    "is-heavy-loaded": "Ist schwer belastet",
+    "coins": {
+      "self": "Münzen",
+      "platinum-coin": "Platinmünze",
+      "gold-coin": "Goldmünzen",
+      "electric-coin": "Elektrummünzen",
+      "silver-coin": "Silbermünzen",
+      "copper-coin": "Kupfermünzen"
+    }
   },
   "notes": {
     "singular": "Notiz",

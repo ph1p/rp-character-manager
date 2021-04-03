@@ -54,7 +54,18 @@
     "add-item": "Add Item",
     "delete-confirm": "Should the item really be deleted?",
     "quantity": "Quantity",
-    "weight": "Weight"
+    "weight": "Weight",
+    "self": "Inventory",
+    "is-loaded": "Is loaded",
+    "is-heavy-loaded": "Is heavy loaded",
+    "coins": {
+      "self": "Coins",
+      "platinum-coin": "Platinum Coin",
+      "gold-coin": "Gold Coin",
+      "electric-coin": "Electric Coin",
+      "silver-coin": "Silver Coin",
+      "copper-coin": "Copper Coin"
+    }
   },
   "notes": {
     "singular": "Note",

@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { observer } from 'mobx-react-lite';
 
+import { Coins } from '../../../store/inventory';
 import { TInventoryItem, useCharacterStore } from '../../../store';
 import { Input } from '../../../components/Input';
 import { PencilIcon } from '../../../components/icons/Pencil';
@@ -151,18 +152,23 @@ export const InventoryComponent = observer(() => {
     <div>
       <ContentBox className="mb-4">
         <h2 className="text-xl">
-          Inventar ({character.inventory.totalLoad} {character.inventory.unit}/
-          {character.inventory.maxLiftPushPull} {character.inventory.unit})
+          {t('inventory.self')} ({character.inventory.totalLoad}{' '}
+          {character.inventory.unit}/{character.inventory.maxLiftPushPull}{' '}
+          {character.inventory.unit})
         </h2>
 
         <div className="flex justify-between mt-2 pb-3 border-b border-b-1 border-gray-100">
           <div>
             &gt; {character.inventory.maxLoad} {character.inventory.unit}
-            <p className="text-gray-500 text-xs uppercase">is loaded</p>
+            <p className="text-gray-500 text-xs uppercase">
+              {t('inventory.is-loaded')}
+            </p>
           </div>
           <div>
             &gt; {character.inventory.maxHeavyLoad} {character.inventory.unit}
-            <p className="text-gray-500 text-xs uppercase">is max loaded</p>
+            <p className="text-gray-500 text-xs uppercase">
+              {t('inventory.is-heavy-loaded')}
+            </p>
           </div>
 
           {character.inventory.isLoaded && (
@@ -226,6 +232,23 @@ export const InventoryComponent = observer(() => {
             {t('inventory.add-item')}
           </button>
         </form>
+      </ContentBox>
+      <ContentBox className="mb-4">
+        <h2 className="text-xl">{t('inventory.coins.self')}</h2>
+        <div className="grid grid-cols-2 gap-4 mt-4">
+          {(Object.keys(character.inventory.coins) as Coins[]).map((coin) => (
+            <Input
+              key={coin}
+              label={t(`inventory.coins.${coin}`)}
+              type="text"
+              name={coin}
+              value={character.inventory.coins[coin]}
+              onChange={(e: any) => {
+                character.inventory.setCoin(coin, +e.currentTarget.value);
+              }}
+            />
+          ))}
+        </div>
       </ContentBox>
     </div>
   );
