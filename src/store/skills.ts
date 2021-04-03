@@ -1,39 +1,45 @@
-import { persist } from 'mobx-persist';
+import { ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
 import defaultSkills from '../data/skills.json';
 
+import { CharacterStore } from './character';
 import { Attributes } from './attributes';
 
-import { rootStore } from '.';
-
-export type Skills = 'acrobatics' |
-  'arcana' |
-  'athletics' |
-  'performance' |
-  'intimidation' |
-  'sleightOfHand' |
-  'history' |
-  'medicine' |
-  'stealth' |
-  'animalHandling' |
-  'insight' |
-  'investigation' |
-  'nature' |
-  'religion' |
-  'deception' |
-  'survival' |
-  'persuasion' |
-  'perception' | undefined;
+export type Skills =
+  | 'acrobatics'
+  | 'arcana'
+  | 'athletics'
+  | 'performance'
+  | 'intimidation'
+  | 'sleightOfHand'
+  | 'history'
+  | 'medicine'
+  | 'stealth'
+  | 'animalHandling'
+  | 'insight'
+  | 'investigation'
+  | 'nature'
+  | 'religion'
+  | 'deception'
+  | 'survival'
+  | 'persuasion'
+  | 'perception'
+  | undefined;
 
 export class CharacterSkill {
-  @persist attribute: Attributes;
-  @persist name: Skills;
-  @persist practiced: boolean = false;
-  @persist bonusValue: number = 0;
+  attribute: Attributes;
+  name: Skills;
+  practiced: boolean = false;
+  bonusValue: number = 0;
 
-  constructor(attributes: CharacterSkill) {
+  @ignore
+  store: CharacterStore;
+
+  constructor(attributes: CharacterSkill, store: CharacterStore) {
     makeAutoObservable(this);
+
+    this.store = store;
 
     Object.assign(this, attributes);
   }
@@ -47,23 +53,26 @@ export class CharacterSkill {
     this.practiced = !this.practiced;
   }
 
-  score(id: string) {
-    const char = rootStore.characterById(id);
+  get score() {
     // bonus +  attribute modifier + proficiency bonus
-    if (char) {
-      return this.bonusValue + char.attributes.getModifier(this.attribute) + (this.practiced ? char.proficiencyBonus : 0);
-    }
-    return 0;
+
+    return (
+      this.bonusValue +
+      this.store.attributes.getModifier(this.attribute) +
+      (this.practiced ? this.store.proficiencyBonus : 0)
+    );
   }
 }
 
-
 export class CharacterSkillsStore {
-  @persist('list', CharacterSkill)
   values: CharacterSkill[] = [];
+  @ignore
+  store: CharacterStore;
 
-  constructor() {
+  constructor(store: CharacterStore) {
     makeAutoObservable(this);
+
+    this.store = store;
 
     if (this.values.length === 0) {
       for (const skill of defaultSkills.values as CharacterSkill[]) {
@@ -73,6 +82,6 @@ export class CharacterSkillsStore {
   }
 
   create(data: CharacterSkill) {
-    this.values.push(new CharacterSkill(data));
+    this.values.push(new CharacterSkill(data, this.store));
   }
 }

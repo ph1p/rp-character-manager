@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { persist } from 'mobx-persist';
+import { ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
 import { CharacterSkillsStore } from './skills';
@@ -8,37 +8,30 @@ import { InventoryStore } from './inventory';
 import { CustomCharacterValue, CustomValueOptions } from './custom-value';
 import { CharacterAttributesStore } from './attributes';
 
-
 export class CharacterStore {
-  @persist id = uuidv4();
+  id = uuidv4();
 
+  @ignore
   editMode = false;
 
-  @persist name = '';
-  @persist level: number = 1;
-
-  // @persist('list', CustomCharacterValue)
-  customValues: CustomCharacterValue[] = [];
+  name = '';
+  level: number = 1;
 
   // hitpoints
-  @persist maxHitpoints = 20;
-  @persist hitpoints = this.maxHitpoints;
-  @persist armorClass: number = 0;
-  @persist initiative: number = 2;
-  @persist movement: number = 0;
-  @persist proficiencyBonus: number = 2;
+  maxHitpoints = 20;
+  hitpoints = this.maxHitpoints;
+  armorClass: number = 0;
+  initiative: number = 2;
+  _movement: number = 0;
+  proficiencyBonus: number = 2;
 
-  @persist('object', InventoryStore)
-  inventory = new InventoryStore();
-
-  @persist('object', CharacterAttributesStore)
-  attributes = new CharacterAttributesStore();
-
-  @persist('object', CharacterSkillsStore)
-  skills = new CharacterSkillsStore();
-
-  @persist('object', CharacterNotesStore)
+  inventory = new InventoryStore(this);
+  attributes = new CharacterAttributesStore(this);
+  skills = new CharacterSkillsStore(this);
   notes = new CharacterNotesStore();
+
+  @ignore
+  customValues: CustomCharacterValue[] = [];
 
   constructor(name?: string) {
     makeAutoObservable(this);
@@ -46,6 +39,24 @@ export class CharacterStore {
     if (name) {
       this.name = name;
     }
+  }
+
+  get passiveWisdom() {
+    const score =
+      (this?.skills?.values || []).find((skill) => skill.name === 'perception')
+        ?.score || 0;
+
+    return score + 10;
+  }
+
+  get movement() {
+    let movement = this._movement;
+    if (this.inventory.isHeavyLoaded) {
+      movement -= 6;
+    } else if (this.inventory.isLoaded) {
+      movement -= 3;
+    }
+    return movement;
   }
 
   createCustomValue(options: CustomValueOptions) {
@@ -77,7 +88,7 @@ export class CharacterStore {
   }
 
   setMovement(movement: number) {
-    this.movement = movement || 0;
+    this._movement = movement || 0;
   }
 
   setInitiative(initiative: number) {

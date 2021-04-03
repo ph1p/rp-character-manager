@@ -1,30 +1,37 @@
-import { FunctionComponent, useRef } from 'react';
+import {
+  FunctionComponent,
+  useRef,
+  SyntheticEvent,
+  PropsWithChildren,
+} from 'react';
 
-export const Modal: FunctionComponent<{
+interface ModalProps {
   onClose: () => void;
   open: boolean;
   className?: string;
-}> = (props) => {
+}
+
+export const Modal: FunctionComponent<PropsWithChildren<ModalProps>> = (
+  props: PropsWithChildren<ModalProps>
+) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   return props.open ? (
-    <>
+    <div
+      ref={wrapperRef}
+      className="fixed z-40 w-full h-full flex bg-opacity-50 bg-black left-0 top-0"
+      onClick={(e: SyntheticEvent) => {
+        if (wrapperRef.current === e.target) {
+          props.onClose();
+        }
+      }}
+    >
       <div
-        ref={wrapperRef}
-        className="fixed z-40 w-full h-full flex bg-opacity-50 bg-black left-0 top-0"
-        onClick={(e) => {
-          if (wrapperRef.current === e.target) {
-            props.onClose();
-          }
-        }}
+        className={`bg-white p-5 mx-auto self-center rounded-md ${
+          props.className || ''
+        }`}
       >
-        <div
-          className={`bg-white p-5 mx-auto self-center rounded-md ${
-            props.className || ''
-          }`}
-        >
-          {props.children}
-        </div>
+        {props.children}
       </div>
-    </>
+    </div>
   ) : null;
 };

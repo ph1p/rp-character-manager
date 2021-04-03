@@ -18,19 +18,19 @@ export const SkillsComponent = observer(() => {
         {character.skills.values
           .slice()
           .sort((skill) => ~Number(skill.practiced) + 1)
-          .map((skill) => {
+          .map((skill, i) => {
             const name = `${t(`skill.${skill.name}`)} (${t(
               `attribute.${skill.attribute}`
             ).substr(0, 3)})`;
             return (
-              <div key={skill.name} className="w-full">
+              <div key={i} className="w-full">
                 <div className="flex items-center w-full">
                   <div
                     className={`mr-2 px-2 text-white bg-${
                       skill.practiced ? 'green' : 'gray'
                     }-500 rounded-full`}
                   >
-                    {addSignToNumber(skill.score(character.id))}
+                    {addSignToNumber(skill.score)}
                   </div>
 
                   {character.editMode ? (

@@ -13,10 +13,10 @@ export const SavingThrowsComponent = observer(() => {
     <div>
       <h3 className="text-2xl mb-3">{t('saving-throws')}</h3>
       <div className="grid gap-2">
-        {character.attributes.values.map((attribute) => (
+        {character.attributes.values.map((attribute, i) => (
           <div
             className="text-center border-gray-100 border bg-gray-50 rounded p-2"
-            key={attribute.name}
+            key={i}
           >
             <div className="uppercase text-xs">
               {t(`attribute.${attribute.name}`)}
@@ -26,7 +26,7 @@ export const SavingThrowsComponent = observer(() => {
                 attribute.isSavingThrow ? 'bg-green-500' : 'bg-gray-500'
               } text-white inline-block rounded`}
             >
-              {addSignToNumber(attribute.savingThrow(character.id))}
+              {addSignToNumber(attribute.savingThrow)}
             </div>
           </div>
         ))}

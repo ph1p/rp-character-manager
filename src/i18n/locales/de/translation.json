@@ -21,6 +21,7 @@
     "file": "Charakter Datei hochladen",
     "success": "Charakter erfolgreich hochgeladen"
   },
+  "passive-wisdom": "Passive Weisheit",
   "attribute": {
     "strength": "Stärke",
     "dexterity": "Geschicklichkeit",
@@ -52,7 +53,8 @@
   "inventory": {
     "add-item": "Gegenstand hinzufügen",
     "delete-confirm": "Soll der Gegenstand wirklich gelöscht werden?",
-    "quantity": "Anzahl"
+    "quantity": "Anzahl",
+    "weight": "Gewicht"
   },
   "notes": {
     "singular": "Notiz",

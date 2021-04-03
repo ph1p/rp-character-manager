@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { create } from 'mobx-persist';
+import { AsyncTrunk } from 'mobx-sync';
 
 import { rootStore } from './store';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -10,16 +10,20 @@ import App from './App';
 import './globals.css';
 import './i18n';
 
-const hydrate = create();
+// const hydrate = create();
 
-Promise.all([hydrate('__rpcm__', rootStore)]).then(() => {
+const trunk = new AsyncTrunk(rootStore, {
+  storage: localStorage,
+});
+
+trunk.init().then(() =>
   ReactDOM.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
     document.getElementById('root')
-  );
-});
+  )
+);
 
 serviceWorkerRegistration.register();
 

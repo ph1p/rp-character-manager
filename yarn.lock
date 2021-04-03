@@ -10387,15 +10387,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"mobx-persist@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "mobx-persist@npm:0.4.1"
-  dependencies:
-    serializr: ^1.1.11
-  checksum: 2c8eb705ae11d32289de6bf688ea015eca0505f720c61520c5d9abdc6b585fa0ab2a848e6262e8968119665bc6c8db3aea4e33e869a95c7610f28d8552945eb6
-  languageName: node
-  linkType: hard
-
 "mobx-react-lite@npm:^3.1.6":
   version: 3.1.6
   resolution: "mobx-react-lite@npm:3.1.6"
@@ -10408,6 +10399,17 @@ fsevents@~2.1.2:
     react-native:
       optional: true
   checksum: 39d31cf2343abc54450b0e796d04c074505501494b3ccceae9155f8f414bc063a64b74c6b579af8d660a59260398a0096732dfc802ff38192dc9b034d432ff13
+  languageName: node
+  linkType: hard
+
+"mobx-sync@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "mobx-sync@npm:3.0.0"
+  dependencies:
+    tslib: ^2.0.0
+  peerDependencies:
+    mobx: "*"
+  checksum: 8a62a05c9bdafc2c6f8fd1459c418ba3a036303c8a627ba22561dff708f889869e1d59c33511fdb388ddaa1e6ffe51fd132fd2bb1f82baa1af98308eb0ad2534
   languageName: node
   linkType: hard
 
@@ -13627,8 +13629,8 @@ resolve@1.18.1:
     eslint-plugin-testing-library: ^3.10.1
     i18next: ^19.8.4
     mobx: ^6.0.4
-    mobx-persist: ^0.4.1
     mobx-react-lite: ^3.1.6
+    mobx-sync: ^3.0.0
     postcss: ^7
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -13920,13 +13922,6 @@ resolve@1.18.1:
   dependencies:
     randombytes: ^2.1.0
   checksum: 97eef70a33c75e690b0c6aa2ffe622ecdfc888d3f181a5cf129e5778228dcd100febabc0f41ff793199ee79acd14cbbad0c69f1348a3893580fe424c4718889b
-  languageName: node
-  linkType: hard
-
-"serializr@npm:^1.1.11":
-  version: 1.5.4
-  resolution: "serializr@npm:1.5.4"
-  checksum: 6c5f824d5d866b3735918e287c64090a9057e64e401952fb9536996de5450b18341d4e1883960a25b7e9c5c0c72126d9e90275ec77565410aa37825a48f6e503
   languageName: node
   linkType: hard
 
@@ -15225,6 +15220,13 @@ resolve@1.18.1:
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: f44fe7f216946b17d3e3074df3746372703cf24e9127b4c045511456e8e4bf25515fb0a1bb3937676cc305651c5d4fcb6377b0588a4c6a957e748c4c28905d17
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "tslib@npm:2.1.0"
+  checksum: d8f5bdd067611651c6b846c2388f4dc8ba1f5af124e66105f5263d1ad56da17f4b8c6566887ca2f205c5a9758451871ceca87d5d06087af2dca1699c5e33db69
   languageName: node
   linkType: hard
 

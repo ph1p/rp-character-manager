@@ -1,11 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-import { persist } from 'mobx-persist';
 import { makeAutoObservable } from 'mobx';
 
 export class CharacterNote {
-  @persist id: string;
-  @persist text = '';
-  @persist date: number;
+  id: string;
+  text = '';
+  date: number;
 
   constructor(text: string, date?: number, id?: string) {
     makeAutoObservable(this);
@@ -21,7 +20,6 @@ export class CharacterNote {
 }
 
 export class CharacterNotesStore {
-  @persist('list', CharacterNote)
   values: CharacterNote[] = [];
 
   constructor() {

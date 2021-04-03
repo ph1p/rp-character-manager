@@ -21,6 +21,7 @@
     "file": "Upload Character-File",
     "success": "Character successfully uploaded"
   },
+  "passive-wisdom": "Passive Wisdom",
   "attribute": {
     "strength": "Strength",
     "dexterity": "Dexterity",
@@ -52,7 +53,8 @@
   "inventory": {
     "add-item": "Add Item",
     "delete-confirm": "Should the item really be deleted?",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "weight": "Weight"
   },
   "notes": {
     "singular": "Note",

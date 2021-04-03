@@ -67,6 +67,7 @@ const DownloadComponent = () => {
 
 export const Character = observer(() => {
   const character = useCharacterStore();
+  const { t } = useTranslation();
 
   if (!character.name) {
     return null;
@@ -84,6 +85,10 @@ export const Character = observer(() => {
             </ContentBox>
             <ContentBox className="mb-4">
               <HitpointsComponent />
+            </ContentBox>
+            <ContentBox className="mb-4">
+              <h3 className="text-2xl mb-3">{t('passive-wisdom')}</h3>
+              <p>{character.passiveWisdom}</p>
             </ContentBox>
             <ContentBox className="grid grid-cols-2 gap-4">
               <AttributesComponent />

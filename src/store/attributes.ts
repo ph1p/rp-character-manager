@@ -1,39 +1,42 @@
-import { persist } from 'mobx-persist';
+import { ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
 import defaultAttributes from '../data/attributes.json';
 
-import { rootStore } from '.';
+import { CharacterStore } from './character';
 
-// import { rootStore } from '.';
-
-export type Attributes = 'strength' |
-  'dexterity' |
-  'constitution' |
-  'intelligence' |
-  'wisdom' |
-  'charisma' | undefined;
+export type Attributes =
+  | 'strength'
+  | 'dexterity'
+  | 'constitution'
+  | 'intelligence'
+  | 'wisdom'
+  | 'charisma'
+  | undefined;
 
 export class CharacterAttribute {
-  @persist score: number = 0;
-  @persist name: Attributes;
-  @persist extraScore: number = 0;
-  @persist isSavingThrow: boolean = false;
+  score: number = 0;
+  name: Attributes;
+  extraScore: number = 0;
+  isSavingThrow: boolean = false;
 
-  constructor(attributes: CharacterAttribute) {
+  @ignore
+  store: CharacterStore;
+
+  constructor(attributes: CharacterAttribute, store: CharacterStore) {
     makeAutoObservable(this);
+    this.store = store;
     Object.assign(this, attributes);
   }
 
   get modifier() {
     // (score +  extra score) - 10 / 2
-    return Math.floor(((this.score + this.extraScore) - 10) / 2) || 0;
+    return Math.floor((this.score + this.extraScore - 10) / 2) || 0;
   }
 
-  savingThrow(id: string) {
-    const char = rootStore.characterById(id);
-    if (this.isSavingThrow && char) {
-      return char.proficiencyBonus + this.modifier;
+  get savingThrow() {
+    if (this.isSavingThrow) {
+      return this.store.proficiencyBonus + this.modifier;
     }
     return this.modifier;
   }
@@ -54,11 +57,14 @@ export class CharacterAttribute {
 }
 
 export class CharacterAttributesStore {
-  @persist('list', CharacterAttribute)
   values: CharacterAttribute[] = [];
+  @ignore
+  store: CharacterStore;
 
-  constructor() {
+  constructor(store: CharacterStore) {
     makeAutoObservable(this);
+
+    this.store = store;
 
     if (this.values.length === 0) {
       for (const attribute of defaultAttributes.values as CharacterAttribute[]) {
@@ -67,15 +73,11 @@ export class CharacterAttributesStore {
     }
   }
 
-  getScore(name: Attributes) {
-    return this.values.find(skill => skill.name === name)?.score || 0;
-  }
-
   getModifier(name: Attributes) {
-    return this.values.find(skill => skill.name === name)?.modifier || 0;
+    return this.values.find((skill) => skill.name === name)?.modifier || 0;
   }
 
   create(data: CharacterAttribute) {
-    this.values.push(new CharacterAttribute(data));
+    this.values.push(new CharacterAttribute(data, this.store));
   }
 }
