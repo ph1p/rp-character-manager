@@ -42,12 +42,10 @@ export const useCharacterStore = (): TCharacterStore => {
 export const StoreProvider = (props: any) => {
   const { id } = useParams<{ id: string }>();
 
+  rootStore.selectCharacter(id);
+
   return (
-    <RootStoreContext.Provider
-      value={Object.assign(rootStore, {
-        currentCharacter: rootStore.characterById(id) || null,
-      })}
-    >
+    <RootStoreContext.Provider value={rootStore}>
       {props.children}
     </RootStoreContext.Provider>
   );

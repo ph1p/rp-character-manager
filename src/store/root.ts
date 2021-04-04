@@ -1,4 +1,4 @@
-import { format } from 'mobx-sync';
+import { format, ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
 import i18n from '../i18n';
@@ -25,9 +25,15 @@ export class RootStore {
         const skills = new CharacterSkillsStore(character);
         const notes = new CharacterNotesStore();
 
-        attributes.values = data.attributes.values.map((attribute) => new CharacterAttribute(attribute, character));
-        skills.values = data.skills.values.map((skill) => new CharacterSkill(skill, character));
+        attributes.values = data.attributes.values.map(
+          (attribute) => new CharacterAttribute(attribute, character)
+        );
+        skills.values = data.skills.values.map(
+          (skill) => new CharacterSkill(skill, character)
+        );
 
+        inventory.unit = data.inventory.unit;
+        inventory.coins = data.inventory.coins;
         inventory.items = data.inventory.items.map(
           (item) => new InventoryItem(item)
         );
@@ -48,6 +54,20 @@ export class RootStore {
     }
   )
   characters: CharacterStore[] = [];
+
+  @ignore
+  selectedCharacterId: string = '';
+
+  selectCharacter(id: string) {
+    if (this.characterById(id)) {
+      this.selectedCharacterId = id;
+    }
+  }
+
+  @ignore
+  get currentCharacter(): CharacterStore | null {
+    return this.characterById(this.selectedCharacterId) || null;
+  }
 
   language: string = 'de';
 
