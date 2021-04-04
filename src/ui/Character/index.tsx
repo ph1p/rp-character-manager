@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
 
@@ -114,7 +113,6 @@ const DownloadComponent = () => {
 
 export const Character = observer(() => {
   const character = useCharacterStore();
-  const { t } = useTranslation();
 
   if (!character.name) {
     return null;

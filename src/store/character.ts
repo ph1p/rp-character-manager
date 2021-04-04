@@ -2,11 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
-import {
-  CharacterClass,
-  CharacterClassType,
-  defaultClasses,
-} from '../data/character';
+import { CharacterClassType, defaultClasses } from '../data/character';
 
 import { CharacterSkillsStore } from './skills';
 import { CharacterNotesStore } from './note';
