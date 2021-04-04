@@ -72,5 +72,25 @@
     "plural": "Notizen",
     "add-note": "Notiz hinzufügen",
     "delete-confirm": "Soll die Notiz wirklich gelöscht werden?"
+  },
+  "class": "Klasse",
+  "hit-die": "Trefferwürfel",
+  "primary-attribute": "Primäres Attribut",
+  "character": {
+    "type": {
+      "custom": "Eigen",
+      "barbarian": "Barbar",
+      "bard": "Barde",
+      "druid": "Druide",
+      "cleric": "Kleriker",
+      "fighter": "Kämpfer",
+      "monk": "Mönch",
+      "paladin": "Paladin",
+      "ranger": "Waldläufer",
+      "rogue": "Schurke",
+      "sorcerer": "Zauberer",
+      "warlock": "Hexenmeister",
+      "wizard": "Magier"
+    }
   }
 }

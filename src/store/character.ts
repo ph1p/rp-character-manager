@@ -2,6 +2,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
+import {
+  CharacterClass,
+  CharacterClassType,
+  defaultClasses,
+} from '../data/character';
+
 import { CharacterSkillsStore } from './skills';
 import { CharacterNotesStore } from './note';
 import { InventoryStore } from './inventory';
@@ -24,6 +30,8 @@ export class CharacterStore {
   initiative: number = 2;
   _movement: number = 0;
   proficiencyBonus: number = 2;
+
+  class: CharacterClassType = 'custom';
 
   inventory = new InventoryStore(this);
   attributes = new CharacterAttributesStore(this);
@@ -57,6 +65,26 @@ export class CharacterStore {
       movement -= 3;
     }
     return movement;
+  }
+
+  get classDetails() {
+    return defaultClasses.find((dc) => dc.type === this.class);
+  }
+
+  get isCustomClass() {
+    return !this.class || this.class === 'custom';
+  }
+
+  setClass(type: CharacterClassType) {
+    this.class = type;
+
+    if (this.classDetails) {
+      for (const attribute of this.attributes.values) {
+        attribute.isSavingThrow = this.classDetails.savingThrows.includes(
+          attribute.name
+        );
+      }
+    }
   }
 
   createCustomValue(options: CustomValueOptions) {

@@ -5,6 +5,8 @@ import { toJS } from 'mobx';
 
 import { CharacterStore } from '../../store/character';
 import { useCharacterStore } from '../../store';
+import { CharacterClassType, defaultClasses } from '../../data/character';
+import { Select } from '../../components/Select';
 import { Input } from '../../components/Input';
 import { ContentBox } from '../../components/ContentBox';
 import { Button } from '../../components/Button';
@@ -37,6 +39,51 @@ export const NameComponent = observer(() => {
           </div>
         </div>
       )}
+
+      <div className="mt-5">
+        {character.editMode ? (
+          <Select
+            value={character.class}
+            onInput={(e) =>
+              character.setClass(e.currentTarget.value as CharacterClassType)
+            }
+          >
+            <option value="custom">{t('character.type.custom')}</option>
+            {defaultClasses.map((charClass) => (
+              <option value={charClass.type}>
+                {t(`character.type.${charClass.type}`)}
+              </option>
+            ))}
+          </Select>
+        ) : (
+          <div>
+            <div className="uppercase text-gray-400">{t('class')}</div>
+            <div className="text-3xl appearance-none bg-transparent w-full lg:w-auto">
+              {t(`character.type.${character.class}`)}
+            </div>
+            <div className="border-t pt-4 mt-4">
+              <div>
+                <strong>{t('passive-wisdom')}:</strong>{' '}
+                {character.passiveWisdom}
+              </div>
+              {character.classDetails && (
+                <>
+                  <div>
+                    <strong>{t('hit-die')}: </strong>
+                    {character.classDetails?.dice}
+                  </div>
+                  <div>
+                    <strong>{t('primary-attribute')}: </strong>
+                    {character.classDetails?.primaryAttribute
+                      .map((a) => t(`attribute.${a}`))
+                      .join(', ')}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 });
@@ -85,10 +132,6 @@ export const Character = observer(() => {
             </ContentBox>
             <ContentBox className="mb-4">
               <HitpointsComponent />
-            </ContentBox>
-            <ContentBox className="mb-4">
-              <h3 className="text-2xl mb-3">{t('passive-wisdom')}</h3>
-              <p>{character.passiveWisdom}</p>
             </ContentBox>
             <ContentBox className="grid grid-cols-2 gap-4">
               <AttributesComponent />

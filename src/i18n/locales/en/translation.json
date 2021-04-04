@@ -72,5 +72,25 @@
     "plural": "Notes",
     "add-note": "Add Note",
     "delete-confirm": "Should the note really be deleted?"
+  },
+  "class": "Class",
+  "hit-die": "Hit Dice",
+  "primary-attribute": "Primary Ability",
+  "character": {
+    "type": {
+      "custom": "Custom",
+      "barbarian": "Barbarian",
+      "bard": "Bard",
+      "druid": "Druid",
+      "cleric": "Cleric",
+      "fighter": "Fighter",
+      "monk": "Monk",
+      "paladin": "Paladin",
+      "ranger": "Ranger",
+      "rogue": "Rogue",
+      "sorcerer": "Sorcerer",
+      "warlock": "Warlock",
+      "wizard": "Wizard"
+    }
   }
 }

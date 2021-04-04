@@ -1,22 +1,13 @@
 import { ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
-import defaultAttributes from '../data/attributes.json';
+import { Attributes, defaultAttributes } from '../data/character';
 
 import { CharacterStore } from './character';
 
-export type Attributes =
-  | 'strength'
-  | 'dexterity'
-  | 'constitution'
-  | 'intelligence'
-  | 'wisdom'
-  | 'charisma'
-  | undefined;
-
 export class CharacterAttribute {
   score: number = 0;
-  name: Attributes;
+  name: Attributes = 'charisma';
   extraScore: number = 0;
   isSavingThrow: boolean = false;
 
@@ -67,7 +58,7 @@ export class CharacterAttributesStore {
     this.store = store;
 
     if (this.values.length === 0) {
-      for (const attribute of defaultAttributes.values as CharacterAttribute[]) {
+      for (const attribute of defaultAttributes as CharacterAttribute[]) {
         this.create(attribute);
       }
     }

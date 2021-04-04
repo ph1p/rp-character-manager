@@ -45,7 +45,7 @@ export const AttributesComponent = observer(() => {
                 onInput={(e) => attribute.setExtraScore(e.currentTarget.value)}
               />
             )}
-            {character.editMode && (
+            {character.editMode && character.isCustomClass && (
               <Checkbox
                 label={t('saving-throw')}
                 checked={attribute.isSavingThrow}

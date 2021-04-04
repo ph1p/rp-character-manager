@@ -1,35 +1,13 @@
 import { ignore } from 'mobx-sync';
 import { makeAutoObservable } from 'mobx';
 
-import defaultSkills from '../data/skills.json';
+import { Skills, Attributes, defaultSkills } from '../data/character';
 
 import { CharacterStore } from './character';
-import { Attributes } from './attributes';
-
-export type Skills =
-  | 'acrobatics'
-  | 'arcana'
-  | 'athletics'
-  | 'performance'
-  | 'intimidation'
-  | 'sleightOfHand'
-  | 'history'
-  | 'medicine'
-  | 'stealth'
-  | 'animalHandling'
-  | 'insight'
-  | 'investigation'
-  | 'nature'
-  | 'religion'
-  | 'deception'
-  | 'survival'
-  | 'persuasion'
-  | 'perception'
-  | undefined;
 
 export class CharacterSkill {
-  attribute: Attributes;
-  name: Skills;
+  attribute: Attributes = 'charisma';
+  name: Skills = 'acrobatics';
   practiced: boolean = false;
   bonusValue: number = 0;
 
@@ -75,7 +53,7 @@ export class CharacterSkillsStore {
     this.store = store;
 
     if (this.values.length === 0) {
-      for (const skill of defaultSkills.values as CharacterSkill[]) {
+      for (const skill of defaultSkills as CharacterSkill[]) {
         this.create(skill);
       }
     }
