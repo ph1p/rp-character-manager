@@ -22,6 +22,7 @@ export const UploadComponent = () => {
     if (data && validate(data)) {
       const char = store.createCharacter(data.name);
 
+      char.setClass(data.class);
       char.setArmorClass(data.armorClass);
       char.setHitpoints(data.hitpoints);
       char.setInitiative(data.initiative);
@@ -34,6 +35,8 @@ export const UploadComponent = () => {
         char.notes.create(note.text, note.date, note.id);
       }
 
+      char.inventory.unit = data.inventory.unit;
+      char.inventory.coins = data.inventory.coins;
       for (const item of data.inventory.items) {
         char.inventory.createItem(item);
       }

@@ -20,7 +20,10 @@ export class RootStore {
           character[key] = data[key];
         }
 
-        const inventory = new InventoryStore(character);
+        const inventory = new InventoryStore(character, {
+          unit: data.inventory.unit,
+          coins: data.inventory.coins,
+        });
         const attributes = new CharacterAttributesStore(character);
         const skills = new CharacterSkillsStore(character);
         const notes = new CharacterNotesStore();
@@ -31,9 +34,6 @@ export class RootStore {
         skills.values = data.skills.values.map(
           (skill) => new CharacterSkill(skill, character)
         );
-
-        inventory.unit = data.inventory.unit;
-        inventory.coins = data.inventory.coins;
         inventory.items = data.inventory.items.map(
           (item) => new InventoryItem(item)
         );

@@ -47,6 +47,11 @@ export type Coins =
   | 'electric-coin'
   | 'silver-coin'
   | 'copper-coin';
+
+interface InventoryOptions {
+  unit?: string;
+  coins?: Record<Coins, number>;
+}
 export class InventoryStore {
   items: InventoryItem[] = [];
 
@@ -63,11 +68,20 @@ export class InventoryStore {
   @ignore
   store: CharacterStore;
 
-  constructor(store: CharacterStore) {
+  constructor(store: CharacterStore, options?: InventoryOptions) {
     makeAutoObservable(this);
     this.store = store;
 
-    console.log(this);
+    if (options?.unit) {
+      this.unit = options.unit;
+    }
+
+    if (options?.coins) {
+      this.coins = {
+        ...this.coins,
+        ...options.coins,
+      };
+    }
   }
 
   setCoin(coin: Coins, value: number) {

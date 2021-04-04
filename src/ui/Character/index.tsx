@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
-import { toJS } from 'mobx';
 
 import { CharacterStore } from '../../store/character';
 import { useCharacterStore } from '../../store';
@@ -93,11 +92,11 @@ const DownloadComponent = () => {
 
   const downloadCharacter = (character: CharacterStore) => {
     const data = `data:${`text/json;charset=utf-8,${encodeURIComponent(
-      JSON.stringify(toJS(character))
+      JSON.stringify(character)
     )}`}`;
     const anchor = document.createElement('a');
     anchor.href = 'data:' + data;
-    anchor.download = `${character.id}.json`;
+    anchor.download = `${character.name}.json`;
     anchor.click();
     anchor.remove();
   };

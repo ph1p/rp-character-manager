@@ -243,10 +243,9 @@ export const InventoryComponent = observer(() => {
               type="text"
               name={coin}
               value={character.inventory.coins[coin]}
-              onChange={(e: any) => {
-                console.log('fsd');
-                character.inventory.setCoin(coin, +e.currentTarget.value);
-              }}
+              onChange={(e: any) =>
+                character.inventory.setCoin(coin, +e.currentTarget.value)
+              }
             />
           ))}
         </div>

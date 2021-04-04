@@ -4,9 +4,6 @@ const schema = {
     id: {
       type: 'string',
     },
-    editMode: {
-      type: 'boolean',
-    },
     name: {
       type: 'string',
     },
@@ -27,7 +24,7 @@ const schema = {
     initiative: {
       type: 'number',
     },
-    movement: {
+    _movement: {
       type: 'number',
     },
     proficiencyBonus: {
@@ -104,14 +101,13 @@ const schema = {
   },
   required: [
     'id',
-    'editMode',
     'name',
     'level',
     'maxHitpoints',
     'hitpoints',
     'armorClass',
     'initiative',
-    'movement',
+    '_movement',
     'proficiencyBonus',
     'inventory',
     'notes',
